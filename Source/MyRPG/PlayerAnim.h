@@ -15,6 +15,8 @@ class MYRPG_API UPlayerAnim : public UAnimInstance
 	GENERATED_BODY()
 	
 public:
+	UPlayerAnim();
+	virtual void NativeBeginPlay() override;
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 	
 public:
@@ -23,4 +25,10 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	float Direction;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool bIsInAir;
+
+private:
+	ACharacter* Character;
 };

@@ -2,6 +2,9 @@
 
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
 
 APlayer_Base::APlayer_Base()
 {
@@ -32,6 +35,8 @@ APlayer_Base::APlayer_Base()
 	Camera->SetRelativeRotation(FRotator(-20.0f, 0.0f, 0.0f));
 
 	SpringArm->bUsePawnControlRotation = true;
+
+	GetCharacterMovement()->JumpZVelocity = 700.0f; // 점프 높이.
 }
 
 // Called when the game starts or when spawned
@@ -45,13 +50,13 @@ void APlayer_Base::BeginPlay()
 void APlayer_Base::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
 void APlayer_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACharacter::Jump);
 
 	PlayerInputComponent->BindAxis("LookUp", this, &APlayer_Base::LookUp);
 	PlayerInputComponent->BindAxis("Turn", this, &APlayer_Base::Turn);
@@ -71,11 +76,12 @@ void APlayer_Base::Turn(float AxisValue)
 
 void APlayer_Base::MoveForward(float AxisValue)
 {
-	AddMovementInput(Camera->GetForwardVector(), AxisValue);
+	FVector Direction = UKismetMathLibrary::GetForwardVector(FRotator(0.0f, GetControlRotation().Yaw, 0.0f));
+	AddMovementInput(Direction, AxisValue);
 }
 
 void APlayer_Base::MoveRight(float AxisValue)
 {
-	AddMovementInput(Camera->GetRightVector(), AxisValue);
+	FVector Direction = UKismetMathLibrary::GetRightVector(FRotator(0.0f, GetControlRotation().Yaw, 0.0f));
+	AddMovementInput(Direction, AxisValue);
 }
-

@@ -27,14 +27,16 @@ public:
 	class UCameraComponent* Camera;
 
 public:
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+public:
+	UFUNCTION()
 	void LookUp(float AxisValue);
+	UFUNCTION()
 	void Turn(float AxisValue);
+	UFUNCTION()
 	void MoveForward(float AxisValue);
+	UFUNCTION()
 	void MoveRight(float AxisValue);
 };

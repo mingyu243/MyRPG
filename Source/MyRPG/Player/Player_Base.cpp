@@ -5,7 +5,6 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-
 APlayer_Base::APlayer_Base()
 {
 	PrimaryActorTick.bCanEverTick = true;

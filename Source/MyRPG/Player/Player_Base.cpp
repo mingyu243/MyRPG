@@ -38,24 +38,22 @@ APlayer_Base::APlayer_Base()
 	GetCharacterMovement()->JumpZVelocity = 700.0f; // 점프 높이.
 }
 
-// Called when the game starts or when spawned
 void APlayer_Base::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
-// Called every frame
 void APlayer_Base::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
-// Called to bind functionality to input
 void APlayer_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction("Chat", EInputEvent::IE_Pressed, this, &APlayer_Base::FocusChatInputText);
 
 	PlayerInputComponent->BindAxis("LookUp", this, &APlayer_Base::LookUp);
 	PlayerInputComponent->BindAxis("Turn", this, &APlayer_Base::Turn);
@@ -83,4 +81,8 @@ void APlayer_Base::MoveRight(float AxisValue)
 {
 	FVector Direction = UKismetMathLibrary::GetRightVector(FRotator(0.0f, GetControlRotation().Yaw, 0.0f));
 	AddMovementInput(Direction, AxisValue);
+}
+
+void APlayer_Base::FocusChatInputText()
+{
 }

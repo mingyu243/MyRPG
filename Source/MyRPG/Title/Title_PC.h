@@ -11,14 +11,13 @@ class MYRPG_API ATitle_PC : public APlayerController
 	
 public:
 	ATitle_PC();
-
-public:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = UI)
-	TSubclassOf<class UUW_Title> TitleUIClass;
-	class UUW_Title* TitleUIObject;
-
 	virtual void BeginPlay() override;
 
+public:
 	void CreateServer();
-	void JoinServer(FString IPAddress);
+	void JoinServer(const FString& IPAddress);
+
+private:
+	TSubclassOf<class UUW_Title> TitleUIClass;
+	class UUW_Title* TitleUIObject;
 };

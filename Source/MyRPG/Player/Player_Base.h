@@ -11,22 +11,18 @@ class MYRPG_API APlayer_Base : public ACharacter
 
 public:
 	APlayer_Base();
-
-protected:
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-public:
+private:
 	UPROPERTY(VisibleAnywhere)
 	class USpringArmComponent* SpringArm;
 
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* Camera;
 
-public:
-	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-public:
+private:
 	UFUNCTION()
 	void LookUp(float AxisValue);
 	UFUNCTION()
@@ -35,4 +31,7 @@ public:
 	void MoveForward(float AxisValue);
 	UFUNCTION()
 	void MoveRight(float AxisValue);
+
+	UFUNCTION()
+	void FocusChatInputText();
 };

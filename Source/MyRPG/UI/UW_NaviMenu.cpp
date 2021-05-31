@@ -12,6 +12,11 @@ void UUW_NaviMenu::NativeConstruct()
 	JoinServerBtn->OnClicked.AddDynamic(this, &UUW_NaviMenu::JoinServerHandler);
 }
 
+void UUW_NaviMenu::ShowUpAnim()
+{
+	PlayAnimation(ShowUp);
+}
+
 void UUW_NaviMenu::CreateServerHandler()
 {
 	ATitle_PC* MyPC = Cast<ATitle_PC>(GetOwningPlayer());
@@ -28,9 +33,4 @@ void UUW_NaviMenu::JoinServerHandler()
 	{
 		MyPC->JoinServer(TEXT("127.0.0.1"));
 	}
-}
-
-void UUW_NaviMenu::ShowUpAnim()
-{
-	PlayAnimation(ShowUp);
 }

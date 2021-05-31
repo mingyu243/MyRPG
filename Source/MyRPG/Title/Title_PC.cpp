@@ -21,11 +21,17 @@ void ATitle_PC::BeginPlay()
 	{
 		TitleUIObject = CreateWidget<UUW_Title>(this, TitleUIClass);
 		TitleUIObject->AddToViewport();
+		TitleUIObject->SetVisibility(ESlateVisibility::Hidden);
 
 		SetShowMouseCursor(true);
 		SetInputMode(FInputModeUIOnly());
 
-		TitleUIObject
+		FTimerHandle StartAnimDelayTimerHandle;
+		GetWorld()->GetTimerManager().SetTimer(StartAnimDelayTimerHandle, FTimerDelegate::CreateLambda([&]()
+			{
+				TitleUIObject->SetVisibility(ESlateVisibility::Visible);
+				TitleUIObject->StartAnim();
+			}), 1.0f , false);
 	}
 }
 

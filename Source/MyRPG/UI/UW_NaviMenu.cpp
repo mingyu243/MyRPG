@@ -29,3 +29,8 @@ void UUW_NaviMenu::JoinServerHandler()
 		MyPC->JoinServer(TEXT("127.0.0.1"));
 	}
 }
+
+void UUW_NaviMenu::ShowUpAnim()
+{
+	PlayAnimation(ShowUp);
+}

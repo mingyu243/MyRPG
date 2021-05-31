@@ -18,11 +18,14 @@ private:
 	UPROPERTY(Meta = (BindWidget))
 	class UButton* JoinServerBtn;
 
-	UPROPERTY(Meta = (BindWidgetAnim))
+	UPROPERTY(Meta = (BindWidgetAnim), Transient)
 	class UWidgetAnimation* ShowUp;
 
 	UFUNCTION()
 	void CreateServerHandler();
 	UFUNCTION()
 	void JoinServerHandler();
+
+public:
+	void ShowUpAnim();
 };

@@ -12,4 +12,6 @@ class MYRPG_API UUW_Title : public UUserWidget
 public:
 	UPROPERTY(Meta = (BindWidget))
 	class UUW_NaviMenu* WB_NaviMenu;
+
+	void StartAnim();
 };

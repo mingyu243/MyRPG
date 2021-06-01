@@ -10,6 +10,9 @@ class MYRPG_API UUW_Title : public UUserWidget
 	GENERATED_BODY()
 
 public:
+	virtual void NativeConstruct() override;
+	
+public:
 	void StartAnim();
 	
 private:

@@ -15,6 +15,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+public:
+	void SetWeapon(class AWeapon* NewWeapon);
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	class USpringArmComponent* SpringArm;
@@ -22,6 +25,9 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* Camera;
 
+	UPROPERTY(VisibleAnywhere)
+	class AWeapon* CurrentWeapon;
+	
 private:
 	UFUNCTION()
 	void LookUp(float AxisValue);

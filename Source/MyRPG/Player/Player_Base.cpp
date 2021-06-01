@@ -1,12 +1,14 @@
 #include "Player_Base.h"
 
 #include "../Main/Main_PC.h"
+#include "../Item/Weapon.h"
 
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Engine/SkeletalMeshSocket.h"
 
 APlayer_Base::APlayer_Base()
 {
@@ -45,6 +47,8 @@ void APlayer_Base::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	AWeapon* NewWeapon = GetWorld()->SpawnActor<AWeapon>(AWeapon::StaticClass());
+	SetWeapon(NewWeapon);
 }
 
 void APlayer_Base::Tick(float DeltaTime)
@@ -61,6 +65,16 @@ void APlayer_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis("Turn", this, &APlayer_Base::Turn);
 	PlayerInputComponent->BindAxis("MoveForward", this, &APlayer_Base::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &APlayer_Base::MoveRight);
+}
+
+void APlayer_Base::SetWeapon(AWeapon* NewWeapon)
+{
+	if (NewWeapon == nullptr) return;
+
+	FName WeaponSocket(TEXT("hand_rSocket"));
+	NewWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, WeaponSocket);
+	NewWeapon->SetOwner(this);
+	CurrentWeapon = NewWeapon;
 }
 
 void APlayer_Base::LookUp(float AxisValue)

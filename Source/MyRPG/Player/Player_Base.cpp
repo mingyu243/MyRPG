@@ -1,8 +1,11 @@
 #include "Player_Base.h"
 
+#include "../Main/Main_PC.h"
+
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 APlayer_Base::APlayer_Base()
@@ -53,7 +56,6 @@ void APlayer_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Chat", EInputEvent::IE_Pressed, this, &APlayer_Base::FocusChatInputText);
 
 	PlayerInputComponent->BindAxis("LookUp", this, &APlayer_Base::LookUp);
 	PlayerInputComponent->BindAxis("Turn", this, &APlayer_Base::Turn);
@@ -81,8 +83,4 @@ void APlayer_Base::MoveRight(float AxisValue)
 {
 	FVector Direction = UKismetMathLibrary::GetRightVector(FRotator(0.0f, GetControlRotation().Yaw, 0.0f));
 	AddMovementInput(Direction, AxisValue);
-}
-
-void APlayer_Base::FocusChatInputText()
-{
 }

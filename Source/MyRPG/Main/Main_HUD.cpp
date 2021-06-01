@@ -18,7 +18,7 @@ void AMain_HUD::BeginPlay()
 	CheckUIObject();
 }
 
-UEditableTextBox* AMain_HUD::GetChatInputTextObject()
+TSharedPtr<SWidget> AMain_HUD::GetChatInputTextObject()
 {
 	return MainUIObject->GetChatInputText();
 }

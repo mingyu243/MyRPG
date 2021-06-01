@@ -13,6 +13,13 @@ void AMain_PC::BeginPlay()
 	SetInputMode(FInputModeGameOnly());
 }
 
+void AMain_PC::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+
+	InputComponent->BindAction(TEXT("Chat"), EInputEvent::IE_Pressed, this, &AMain_PC::FocusChatInputText);
+}
+
 void AMain_PC::SendMessage(const FText& Text)
 {
 	UMyGameInstance* MyGI = GetGameInstance<UMyGameInstance>();
@@ -23,6 +30,22 @@ void AMain_PC::SendMessage(const FText& Text)
 
 		CtoS_SendMessage(Message);
 	}
+}
+
+void AMain_PC::FocusChatInputText()
+{
+	AMain_HUD* HUD = GetHUD<AMain_HUD>();
+	if (HUD == nullptr) return;
+
+	FInputModeUIOnly InputMode;
+	InputMode.SetWidgetToFocus(HUD->GetChatInputTextObject());
+
+	SetInputMode(InputMode);
+}
+
+void AMain_PC::FocusGame()
+{
+	SetInputMode(FInputModeGameOnly());
 }
 
 void AMain_PC::CtoS_SendMessage_Implementation(const FString& Message)

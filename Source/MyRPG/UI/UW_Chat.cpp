@@ -33,22 +33,30 @@ FText UUW_Chat::GetChatInputTextMessage()
 	return ChatInputText->GetText();
 }
 
-UEditableTextBox* UUW_Chat::GetChatInputText()
+TSharedPtr<SWidget> UUW_Chat::GetChatInputText()
 {
-	return ChatInputText;
+	return ChatInputText->GetCachedWidget();
 }
 
 void UUW_Chat::OnChatTextCommitted(const FText& Text, ETextCommit::Type CommitMethod)
 {
+	AMain_PC* MyPC = Cast<AMain_PC>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	if (MyPC == nullptr) return;
+
+
+
 	switch (CommitMethod)
 	{
 	case ETextCommit::OnEnter:
-		AMain_PC* MyPC = Cast<AMain_PC>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
-		if (MyPC == nullptr) return;
-
-		MyPC->SendMessage(Text);
-
-		SetChatInputTextMessage(FText::GetEmpty());
+		if (Text.IsEmpty() == false)
+		{
+			MyPC->SendMessage(Text);
+			SetChatInputTextMessage(FText::GetEmpty());
+		}
+		MyPC->FocusGame();
+		break;
+	case ETextCommit::OnCleared:
+		MyPC->FocusGame();
 		break;
 	}
 }

@@ -31,7 +31,4 @@ private:
 	void MoveForward(float AxisValue);
 	UFUNCTION()
 	void MoveRight(float AxisValue);
-
-	UFUNCTION()
-	void FocusChatInputText();
 };

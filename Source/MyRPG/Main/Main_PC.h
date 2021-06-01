@@ -11,9 +11,17 @@ class MYRPG_API AMain_PC : public APlayerController
 	
 public:
 	virtual void BeginPlay() override;
+	virtual void SetupInputComponent() override;
 
 public:
 	void SendMessage(const FText& Text);
+
+public:
+	UFUNCTION()
+	void FocusChatInputText();
+
+	UFUNCTION()
+	void FocusGame();
 
 private:
 	UFUNCTION(Server, Unreliable)

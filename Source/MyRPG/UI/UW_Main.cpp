@@ -2,7 +2,7 @@
 
 #include "UW_Chat.h"
 
-UEditableTextBox* UUW_Main::GetChatInputText()
+TSharedPtr<SWidget> UUW_Main::GetChatInputText()
 {
 	return WB_Chat->GetChatInputText();
 }

@@ -10,7 +10,7 @@ class MYRPG_API UUW_Main : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	class UEditableTextBox* GetChatInputText();
+	TSharedPtr<class SWidget> GetChatInputText();
 	void AddChatMessage(const FString& Message);
 	
 private:

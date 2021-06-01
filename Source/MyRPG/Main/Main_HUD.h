@@ -14,7 +14,7 @@ public:
 	virtual void BeginPlay() override;
 
 public:
-	class UEditableTextBox* GetChatInputTextObject();
+	TSharedPtr<class SWidget> GetChatInputTextObject();
 	void AddChatMessage(const FString& Message);
 
 private:

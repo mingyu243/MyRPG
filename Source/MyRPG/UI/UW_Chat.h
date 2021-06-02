@@ -16,7 +16,7 @@ public:
 	void AddChatMessage(const FString& Message);
 	void SetChatInputTextMessage(const FText& Text);
 	FText GetChatInputTextMessage();
-	TSharedPtr<class SWidget> GetChatInputText();
+	TSharedPtr<class SWidget> GetChatInputTextObject();
 
 private:
 	UPROPERTY(Meta = (BindWidget))

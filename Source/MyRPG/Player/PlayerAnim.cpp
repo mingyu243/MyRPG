@@ -7,6 +7,9 @@
 UPlayerAnim::UPlayerAnim()
 {
 	bIsInAir = false;
+	bCanAttack = true;
+	CurrentComboIndex = 0;
+	MaxComboIndex = 3;
 }
 
 void UPlayerAnim::NativeBeginPlay()
@@ -16,7 +19,7 @@ void UPlayerAnim::NativeBeginPlay()
 	APawn* Pawn = TryGetPawnOwner();
 	if (::IsValid(Pawn))
 	{
-		Character = Cast<ACharacter>(Pawn);
+		Player = Cast<APlayer_Base>(Pawn);
 	}
 }
 
@@ -24,13 +27,29 @@ void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeUpdateAnimation(DeltaSeconds);
 
-	if (Character == nullptr)
+	if (Player == nullptr || Player->IsValidLowLevel() == false)
 	{
 		return;
 	}
 
-	Speed = Character->GetVelocity().Size();
-	Direction = CalculateDirection(Character->GetVelocity(), Character->GetActorRotation());
+	Speed = Player->GetVelocity().Size();
+	Direction = CalculateDirection(Player->GetVelocity(), Player->GetActorRotation());
 
-	bIsInAir = Character->GetCharacterMovement()->IsFalling();
+	bIsInAir = Player->GetCharacterMovement()->IsFalling();
+}
+
+void UPlayerAnim::Attack()
+{
+	if (bCanAttack == false)
+	{
+		UE_LOG(LogClass, Warning, TEXT("Cant Next Attack"));
+		return;
+	}
+	bCanAttack = false;
+
+	CurrentComboIndex %= MaxComboIndex;
+	CurrentComboIndex++;
+
+	UE_LOG(LogClass, Warning, TEXT("Attack(%d)"), CurrentComboIndex);
+	bIsAttack = true;
 }

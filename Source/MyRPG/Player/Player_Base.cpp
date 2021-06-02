@@ -2,6 +2,7 @@
 
 #include "../Main/Main_PC.h"
 #include "../Item/Weapon.h"
+#include "PlayerAnim.h"
 
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
@@ -47,8 +48,8 @@ void APlayer_Base::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	AWeapon* NewWeapon = GetWorld()->SpawnActor<AWeapon>(AWeapon::StaticClass());
-	SetWeapon(NewWeapon);
+	//AWeapon* NewWeapon = GetWorld()->SpawnActor<AWeapon>(AWeapon::StaticClass(), FVector(-10.0f, 2.0f, 2.0f), FRotator(0.0f, 0.0f, -90.0f));
+	//SetWeapon(NewWeapon);
 }
 
 void APlayer_Base::Tick(float DeltaTime)
@@ -60,6 +61,7 @@ void APlayer_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction("Attack", EInputEvent::IE_Pressed, this, &APlayer_Base::Attack);
 
 	PlayerInputComponent->BindAxis("LookUp", this, &APlayer_Base::LookUp);
 	PlayerInputComponent->BindAxis("Turn", this, &APlayer_Base::Turn);
@@ -67,12 +69,26 @@ void APlayer_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis("MoveRight", this, &APlayer_Base::MoveRight);
 }
 
+void APlayer_Base::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	AnimBP = Cast<UPlayerAnim>(GetMesh()->GetAnimInstance());
+}
+
+void APlayer_Base::Attack()
+{
+	if (AnimBP == nullptr) return;
+
+	AnimBP->Attack();
+}
+
 void APlayer_Base::SetWeapon(AWeapon* NewWeapon)
 {
 	if (NewWeapon == nullptr) return;
 
 	FName WeaponSocket(TEXT("hand_rSocket"));
-	NewWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, WeaponSocket);
+	NewWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, WeaponSocket);
 	NewWeapon->SetOwner(this);
 	CurrentWeapon = NewWeapon;
 }

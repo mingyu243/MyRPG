@@ -16,14 +16,24 @@ public:
 	
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	float Speed;
+	class APlayer_Base* Player;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	float Speed;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	float Direction;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool bIsInAir;
 
-private:
-	ACharacter* Character;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool bIsAttack;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool bCanAttack;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 MaxComboIndex;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 CurrentComboIndex;
+
+public:
+	void Attack();
 };

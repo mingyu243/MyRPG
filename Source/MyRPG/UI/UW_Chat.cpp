@@ -33,7 +33,7 @@ FText UUW_Chat::GetChatInputTextMessage()
 	return ChatInputText->GetText();
 }
 
-TSharedPtr<SWidget> UUW_Chat::GetChatInputText()
+TSharedPtr<SWidget> UUW_Chat::GetChatInputTextObject()
 {
 	return ChatInputText->GetCachedWidget();
 }

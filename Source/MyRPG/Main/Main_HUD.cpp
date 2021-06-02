@@ -18,9 +18,16 @@ void AMain_HUD::BeginPlay()
 	CheckUIObject();
 }
 
+void AMain_HUD::AddChatMessage(const FString& Message)
+{
+	if (!CheckUIObject()) return;
+
+	MainUIObject->AddChatMessage(Message);
+}
+
 TSharedPtr<SWidget> AMain_HUD::GetChatInputTextObject()
 {
-	return MainUIObject->GetChatInputText();
+	return MainUIObject->GetChatInputTextObject();
 }
 
 bool AMain_HUD::CheckUIObject()
@@ -44,11 +51,4 @@ bool AMain_HUD::CreateUIObject()
 		}
 	}
 	return false;
-}
-
-void AMain_HUD::AddChatMessage(const FString& Message)
-{
-	if (!CheckUIObject()) return;
-
-	MainUIObject->AddChatMessage(Message);
 }

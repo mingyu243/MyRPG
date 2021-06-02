@@ -2,9 +2,9 @@
 
 #include "UW_Chat.h"
 
-TSharedPtr<SWidget> UUW_Main::GetChatInputText()
+TSharedPtr<SWidget> UUW_Main::GetChatInputTextObject()
 {
-	return WB_Chat->GetChatInputText();
+	return WB_Chat->GetChatInputTextObject();
 }
 
 void UUW_Main::AddChatMessage(const FString& Message)

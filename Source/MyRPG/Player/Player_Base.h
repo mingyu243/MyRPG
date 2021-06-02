@@ -14,8 +14,10 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void PostInitializeComponents() override;
 
 public:
+	void Attack();
 	void SetWeapon(class AWeapon* NewWeapon);
 
 private:
@@ -27,6 +29,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	class AWeapon* CurrentWeapon;
+
+	UPROPERTY(VisibleAnywhere)
+	class UPlayerAnim* AnimBP;
 	
 private:
 	UFUNCTION()

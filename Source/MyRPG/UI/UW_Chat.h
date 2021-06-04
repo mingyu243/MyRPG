@@ -21,7 +21,6 @@ public:
 private:
 	UPROPERTY(Meta = (BindWidget))
 	class UScrollBox* ChatHistoryArea;
-
 	UPROPERTY(Meta = (BindWidget))
 	class UEditableTextBox* ChatInputText;
 

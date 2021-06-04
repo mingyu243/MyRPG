@@ -7,9 +7,13 @@
 UPlayerAnim::UPlayerAnim()
 {
 	bIsInAir = false;
-	bCanAttack = true;
-	CurrentComboIndex = 0;
-	MaxComboIndex = 3;
+	IsDead = false;
+
+	static ConstructorHelpers::FObjectFinder<UAnimMontage> AM_Attack(TEXT("AnimMontage'/Game/Blueprints/Player/Animation/Combo_SwordShield.Combo_SwordShield'"));
+	if (AM_Attack.Succeeded())
+	{
+		AttackMontage = AM_Attack.Object;
+	}
 }
 
 void UPlayerAnim::NativeBeginPlay()
@@ -38,18 +42,39 @@ void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)
 	bIsInAir = Player->GetCharacterMovement()->IsFalling();
 }
 
-void UPlayerAnim::Attack()
+void UPlayerAnim::PlayAttackMontage()
 {
-	if (bCanAttack == false)
+	if (IsDead) return;
+
+	Montage_Play(AttackMontage, 1.0f);
+}
+
+void UPlayerAnim::JumpToAttackMontageSection(int32 NewSection)
+{
+	if (IsDead) return;
+
+	UE_LOG(LogClass, Warning, TEXT("JumpToAttackMontageSection : %d"), NewSection);
+
+	if (Montage_IsPlaying(AttackMontage))
 	{
-		UE_LOG(LogClass, Warning, TEXT("Cant Next Attack"));
-		return;
+		UE_LOG(LogClass, Warning, TEXT("Montage_IsPlaying"));
+
+		Montage_JumpToSection(GetAttackMontageSectionName(NewSection), AttackMontage);
 	}
-	bCanAttack = false;
+}
 
-	CurrentComboIndex %= MaxComboIndex;
-	CurrentComboIndex++;
+void UPlayerAnim::AnimNotify_AttackHitCheck()
+{
+	OnAttackHitCheck.Broadcast();
+}
 
-	UE_LOG(LogClass, Warning, TEXT("Attack(%d)"), CurrentComboIndex);
-	bIsAttack = true;
+void UPlayerAnim::AnimNotify_NextAttackCheck()
+{
+	UE_LOG(LogClass, Warning, TEXT("AnimNotify_NextAttackCheck"));
+	OnNextAttackCheck.Broadcast();
+}
+
+FName UPlayerAnim::GetAttackMontageSectionName(int32 Section)
+{
+	return FName(*FString::Printf(TEXT("Attack%d"), Section));
 }

@@ -17,21 +17,31 @@ public:
 	virtual void PostInitializeComponents() override;
 
 public:
-	void Attack();
 	void SetWeapon(class AWeapon* NewWeapon);
+	void Attack();
 
 private:
 	UPROPERTY(VisibleAnywhere)
 	class USpringArmComponent* SpringArm;
-
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* Camera;
-
 	UPROPERTY(VisibleAnywhere)
 	class AWeapon* CurrentWeapon;
 
+private:
 	UPROPERTY(VisibleAnywhere)
 	class UPlayerAnim* AnimBP;
+
+	UPROPERTY(VisibleAnywhere)
+	bool IsAttacking;
+	UPROPERTY(VisibleAnywhere)
+	bool IsComboInputOn;
+	UPROPERTY(VisibleAnywhere)
+	bool CanNextCombo;
+	UPROPERTY(VisibleAnywhere)
+	int32 CurrentCombo;
+	UPROPERTY(VisibleAnywhere)
+	int32 MaxCombo;
 	
 private:
 	UFUNCTION()
@@ -42,4 +52,13 @@ private:
 	void MoveForward(float AxisValue);
 	UFUNCTION()
 	void MoveRight(float AxisValue);
+
+private:
+	UFUNCTION()
+	void OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted);
+	void NextAttackCheck();
+	void AttackHitCheck();
+
+	void AttackStartComboState();
+	void AttackEndComboState();
 };

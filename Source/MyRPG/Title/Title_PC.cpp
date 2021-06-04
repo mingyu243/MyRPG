@@ -7,7 +7,6 @@
 ATitle_PC::ATitle_PC()
 {
 	static ConstructorHelpers::FClassFinder<UUW_Title> WB_Title(TEXT("WidgetBlueprint'/Game/Blueprints/UI/WB/Title/WB_Title.WB_Title_C'"));
-	
 	if (WB_Title.Succeeded())
 	{
 		TitleUIClass = WB_Title.Class;

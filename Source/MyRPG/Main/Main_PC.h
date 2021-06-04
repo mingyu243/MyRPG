@@ -19,7 +19,6 @@ public:
 public:
 	UFUNCTION()
 	void FocusChatInputText();
-
 	UFUNCTION()
 	void FocusGame();
 

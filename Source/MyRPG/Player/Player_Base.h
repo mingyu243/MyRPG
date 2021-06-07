@@ -19,6 +19,10 @@ public:
 public:
 	void SetWeapon(class AWeapon* NewWeapon);
 	void Attack();
+	UFUNCTION(Server, UnReliable)
+	void CtoS_Attack();
+	UFUNCTION(NetMulticast, UnReliable)
+	void MC_Attack();
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -52,6 +56,8 @@ private:
 	void MoveForward(float AxisValue);
 	UFUNCTION()
 	void MoveRight(float AxisValue);
+	UFUNCTION()
+	void StartJump();
 
 private:
 	UFUNCTION()

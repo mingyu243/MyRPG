@@ -53,12 +53,8 @@ void UPlayerAnim::JumpToAttackMontageSection(int32 NewSection)
 {
 	if (IsDead) return;
 
-	UE_LOG(LogClass, Warning, TEXT("JumpToAttackMontageSection : %d"), NewSection);
-
 	if (Montage_IsPlaying(AttackMontage))
 	{
-		UE_LOG(LogClass, Warning, TEXT("Montage_IsPlaying"));
-
 		Montage_JumpToSection(GetAttackMontageSectionName(NewSection), AttackMontage);
 	}
 }
@@ -70,7 +66,6 @@ void UPlayerAnim::AnimNotify_AttackHitCheck()
 
 void UPlayerAnim::AnimNotify_NextAttackCheck()
 {
-	UE_LOG(LogClass, Warning, TEXT("AnimNotify_NextAttackCheck"));
 	OnNextAttackCheck.Broadcast();
 }
 

@@ -4,6 +4,7 @@
 #include "Blueprint/UserWidget.h"
 #include "UW_Main.generated.h"
 
+// (Main Level¿« ∏ﬁ¿Œ UI)
 UCLASS()
 class MYRPG_API UUW_Main : public UUserWidget
 {

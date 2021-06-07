@@ -1,9 +1,10 @@
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "UW_Chat.generated.h"
 
+// (채팅 UI)
 UCLASS()
 class MYRPG_API UUW_Chat : public UUserWidget
 {

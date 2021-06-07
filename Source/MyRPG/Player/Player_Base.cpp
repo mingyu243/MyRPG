@@ -1,4 +1,4 @@
-#include "Player_Base.h"
+﻿#include "Player_Base.h"
 
 #include "../Main/Main_PC.h"
 #include "../Item/Weapon.h"
@@ -36,10 +36,10 @@ APlayer_Base::APlayer_Base()
 	SpringArm->SocketOffset = FVector(0.0f, 0.0f, 300.0f);
 	Camera->SetRelativeRotation(FRotator(-20.0f, 0.0f, 0.0f));
 	SpringArm->bUsePawnControlRotation = true;
-	GetCharacterMovement()->JumpZVelocity = 700.0f; // ���� ����.
+	GetCharacterMovement()->JumpZVelocity = 700.0f; // 점프 높이.
 
 	IsAttacking = false;
-	MaxCombo = 4;
+	MaxCombo = 3;
 	AttackEndComboState();
 }
 
@@ -59,7 +59,7 @@ void APlayer_Base::Tick(float DeltaTime)
 void APlayer_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &APlayer_Base::StartJump);
 	PlayerInputComponent->BindAction("Attack", EInputEvent::IE_Pressed, this, &APlayer_Base::Attack);
 
 	PlayerInputComponent->BindAxis("LookUp", this, &APlayer_Base::LookUp);
@@ -80,7 +80,27 @@ void APlayer_Base::PostInitializeComponents()
 
 void APlayer_Base::Attack()
 {
-	if (IsAttacking)
+	CtoS_Attack();
+}
+
+void APlayer_Base::CtoS_Attack_Implementation()
+{
+	MC_Attack();
+}
+
+void APlayer_Base::MC_Attack_Implementation()
+{
+	if (GetCharacterMovement()->IsFalling()) return;
+
+	if (IsAttacking == false) //if (CurrentCombo == 0)
+	{
+		IsAttacking = true;
+
+		AttackStartComboState();
+		AnimBP->PlayAttackMontage();
+		AnimBP->JumpToAttackMontageSection(CurrentCombo);
+	}
+	else
 	{
 		if (FMath::IsWithinInclusive<int32>(CurrentCombo, 1, MaxCombo))
 		{
@@ -88,16 +108,6 @@ void APlayer_Base::Attack()
 			{
 				IsComboInputOn = true;
 			}
-		}
-	}
-	else
-	{
-		//if (CurrentCombo == 0)
-		{
-			AttackStartComboState();
-			AnimBP->PlayAttackMontage();
-			AnimBP->JumpToAttackMontageSection(CurrentCombo);
-			IsAttacking = true;
 		}
 	}
 }
@@ -134,6 +144,13 @@ void APlayer_Base::MoveRight(float AxisValue)
 	AddMovementInput(Direction, AxisValue);
 }
 
+void APlayer_Base::StartJump()
+{
+	if (IsAttacking) return;
+
+	bPressedJump = true; // ACharacter::Jump()를 호출한 것과 비슷함.
+}
+
 void APlayer_Base::OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted)
 {
 	if (IsAttacking)
@@ -148,13 +165,10 @@ void APlayer_Base::OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted
 
 void APlayer_Base::NextAttackCheck()
 {
-	UE_LOG(LogClass, Warning, TEXT("NextAttackCheck"));
 	CanNextCombo = false;
 
 	if (IsComboInputOn)
 	{
-		UE_LOG(LogClass, Warning, TEXT("IsComboInputOn"));
-
 		AttackStartComboState();
 		AnimBP->JumpToAttackMontageSection(CurrentCombo);
 	}
@@ -162,25 +176,26 @@ void APlayer_Base::NextAttackCheck()
 
 void APlayer_Base::AttackHitCheck()
 {
-	// ����.
+	// 공격.
 }
 
 void APlayer_Base::AttackStartComboState()
 {
 	CanNextCombo = true;
 	IsComboInputOn = false;
+
+	// 마지막 공격이 아니면,
 	if (FMath::IsWithinInclusive<int32>(CurrentCombo, 0, MaxCombo - 1))
 	{
+		// CurrentCombo 1 증가.
 		CurrentCombo = FMath::Clamp<int32>(CurrentCombo + 1, 1, MaxCombo);
-		UE_LOG(LogClass, Warning, TEXT("AttackStartComboState : %d"), CurrentCombo);
 	}
 }
 
 void APlayer_Base::AttackEndComboState()
 {
-	UE_LOG(LogClass, Warning, TEXT("AttackEndComboState : %d"), CurrentCombo);
-
-	IsComboInputOn = false;
 	CanNextCombo = false;
+	IsComboInputOn = false;
+
 	CurrentCombo = 0;
 }

@@ -1,9 +1,10 @@
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "UW_NaviMenu.generated.h"
 
+// (네비게이션 메뉴 선택 UI)
 UCLASS()
 class MYRPG_API UUW_NaviMenu : public UUserWidget
 {

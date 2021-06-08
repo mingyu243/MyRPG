@@ -19,6 +19,7 @@ public:
 
 public:
 	void SetWeapon(class AWeapon* NewWeapon);
+	class AWeapon* GetWeapon();
 	void Attack();
 	UFUNCTION(Server, UnReliable)
 	void CtoS_Attack();

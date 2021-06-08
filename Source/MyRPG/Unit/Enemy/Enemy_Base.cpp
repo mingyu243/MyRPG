@@ -1,5 +1,7 @@
 #include "Enemy_Base.h"
 
+#include "Enemy_AC.h"
+
 #include "Perception/PawnSensingComponent.h"
 
 AEnemy_Base::AEnemy_Base()
@@ -8,6 +10,8 @@ AEnemy_Base::AEnemy_Base()
 
 	PawnSensing = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PAWNSENSING"));
 
+	AIControllerClass = AEnemy_AC::StaticClass();
+	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 }
 
 void AEnemy_Base::BeginPlay()

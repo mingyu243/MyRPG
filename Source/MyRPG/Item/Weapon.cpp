@@ -2,20 +2,27 @@
 
 AWeapon::AWeapon()
 {
-	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WEAPONMESH"));
-	RootComponent = WeaponMesh;
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MESH"));
+	RootComponent = Mesh;
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> SM_WeaponMesh(TEXT("StaticMesh'/Game/ModularRPGHeroesPolyart/Meshes/Weapons/Sword01SM.Sword01SM'"));
 	if (SM_WeaponMesh.Succeeded())
 	{
-		WeaponMesh->SetStaticMesh(SM_WeaponMesh.Object);
+		Mesh->SetStaticMesh(SM_WeaponMesh.Object);
 	}
-	WeaponMesh->SetCollisionProfileName(TEXT("NoCollision"));
+	Mesh->SetCollisionProfileName(TEXT("NoCollision"));
+
+	WeaponType = EWeaponType::SWORD_SHIELD;
 }
 
 void AWeapon::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+EWeaponType AWeapon::GetWeaponType()
+{
+	return WeaponType;
 }
 

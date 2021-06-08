@@ -18,5 +18,4 @@ public:
 private:
 	UPROPERTY(VisibleAnywhere)
 	class UPawnSensingComponent* PawnSensing;
-
 };

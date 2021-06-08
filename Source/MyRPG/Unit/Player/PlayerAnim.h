@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
+#include "../../Item/Weapon.h"
 #include "PlayerAnim.generated.h"
 
 DECLARE_MULTICAST_DELEGATE(FOnNextAttackCheckDelegate);
@@ -36,6 +37,8 @@ private:
 	bool bIsInAir;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Meta = (AllowPrivateAccess = true))
 	bool IsDead;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Meta = (AllowPrivateAccess = true))
+	EWeaponType CurrentWeaponType;
 	
 	UPROPERTY(VisibleAnywhere)
 	UAnimMontage* AttackMontage;

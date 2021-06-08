@@ -1,6 +1,7 @@
 #include "PlayerAnim.h"
 
 #include "Player_Base.h"
+#include "../../Item/Weapon.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -40,6 +41,7 @@ void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)
 	Direction = CalculateDirection(Player->GetVelocity(), Player->GetActorRotation());
 
 	bIsInAir = Player->GetCharacterMovement()->IsFalling();
+	CurrentWeaponType = Player->GetWeapon()->GetWeaponType();
 }
 
 void UPlayerAnim::PlayAttackMontage()

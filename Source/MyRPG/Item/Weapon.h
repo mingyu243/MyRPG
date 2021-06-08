@@ -25,6 +25,12 @@ public:
 	virtual void BeginPlay() override;
 
 public:
+	EWeaponType GetWeaponType();
+
+private:
 	UPROPERTY(VisibleAnywhere)
-	class UStaticMeshComponent* WeaponMesh;
+	class UStaticMeshComponent* Mesh;
+
+	UPROPERTY(VisibleAnywhere)
+	EWeaponType WeaponType;
 };

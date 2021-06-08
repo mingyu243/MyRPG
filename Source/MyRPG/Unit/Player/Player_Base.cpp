@@ -122,6 +122,11 @@ void APlayer_Base::SetWeapon(AWeapon* NewWeapon)
 	CurrentWeapon = NewWeapon;
 }
 
+AWeapon* APlayer_Base::GetWeapon()
+{
+	return CurrentWeapon;
+}
+
 void APlayer_Base::LookUp(float AxisValue)
 {
 	AddControllerPitchInput(AxisValue);

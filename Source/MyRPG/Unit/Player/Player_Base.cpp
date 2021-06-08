@@ -1,9 +1,8 @@
 ﻿#include "Player_Base.h"
 
-#include "../Main/Main_PC.h"
-#include "../Item/Weapon.h"
+#include "../../Main/Main_PC.h"
+#include "../../Item/Weapon.h"
 #include "PlayerAnim.h"
-#include "CharacterStatComponent.h"
 
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
@@ -18,7 +17,7 @@ APlayer_Base::APlayer_Base()
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SPRINGARM"));
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CAMERA"));
-	CharacterStat = CreateDefaultSubobject<UCharacterStatComponent>(TEXT("CHARACTERSTAT"));
+
 	SpringArm->SetupAttachment(RootComponent);
 	Camera->SetupAttachment(SpringArm);
 
@@ -111,11 +110,6 @@ void APlayer_Base::MC_Attack_Implementation()
 			}
 		}
 	}
-}
-
-UCharacterStatComponent* APlayer_Base::GetCharacterStat()
-{
-	return CharacterStat;
 }
 
 void APlayer_Base::SetWeapon(AWeapon* NewWeapon)

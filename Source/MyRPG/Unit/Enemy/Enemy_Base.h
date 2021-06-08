@@ -2,10 +2,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "../Unit.h"
 #include "Enemy_Base.generated.h"
 
 UCLASS()
-class MYRPG_API AEnemy_Base : public ACharacter
+class MYRPG_API AEnemy_Base : public AUnit
 {
 	GENERATED_BODY()
 
@@ -17,7 +18,5 @@ public:
 private:
 	UPROPERTY(VisibleAnywhere)
 	class UPawnSensingComponent* PawnSensing;
-	UPROPERTY(VisibleAnywhere)
-	class UCharacterStatComponent* CharacterStat;
 
 };

@@ -2,6 +2,7 @@
 
 UCharacterStatComponent::UCharacterStatComponent()
 {
+	Attack = 10;
 }
 
 void UCharacterStatComponent::BeginPlay()

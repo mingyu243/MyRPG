@@ -2,10 +2,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "../Unit.h"
 #include "Player_Base.generated.h"
 
 UCLASS()
-class MYRPG_API APlayer_Base : public ACharacter
+class MYRPG_API APlayer_Base : public AUnit
 {
 	GENERATED_BODY()
 
@@ -17,7 +18,6 @@ public:
 	virtual void PostInitializeComponents() override;
 
 public:
-	class UCharacterStatComponent* GetCharacterStat();
 	void SetWeapon(class AWeapon* NewWeapon);
 	void Attack();
 	UFUNCTION(Server, UnReliable)
@@ -32,8 +32,6 @@ private:
 	class UCameraComponent* Camera;
 	UPROPERTY(VisibleAnywhere)
 	class AWeapon* CurrentWeapon;
-	UPROPERTY(VisibleAnywhere)
-	class UCharacterStatComponent* CharacterStat;
 
 private:
 	UPROPERTY(VisibleAnywhere)

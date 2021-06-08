@@ -14,13 +14,20 @@ public:
 	virtual void BeginPlay() override;
 	virtual void InitializeComponent() override;
 
+public:
+	void Attacked(float Damage);
+	void SetHP(float NewHP);
+	float GetDamage();
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	float MaxHP;
 	UPROPERTY(VisibleAnywhere)
 	float CurrentHP;
-
-	// 각종 스탯들.
-
+	
+	UPROPERTY(VisibleAnywhere)
+	float Attack;
+	
+	// 각종 직업 별 스탯.
 		
 };

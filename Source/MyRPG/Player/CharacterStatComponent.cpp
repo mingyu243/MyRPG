@@ -2,26 +2,36 @@
 
 UCharacterStatComponent::UCharacterStatComponent()
 {
-	PrimaryComponentTick.bCanEverTick = true;
 }
 
 void UCharacterStatComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
 	
 }
 
 void UCharacterStatComponent::InitializeComponent()
 {
+	Super::InitializeComponent();
+
 }
 
-
-// Called every frame
-void UCharacterStatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UCharacterStatComponent::Attacked(float Damage)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
+	float NewHP = FMath::Clamp<float>(CurrentHP - Damage, 0.0f, MaxHP);
+	SetHP(NewHP);
 }
 
+void UCharacterStatComponent::SetHP(float NewHP)
+{
+	CurrentHP = NewHP;
+	if (CurrentHP < KINDA_SMALL_NUMBER)
+	{
+		CurrentHP = 0.0f;
+	}
+}
+
+float UCharacterStatComponent::GetDamage()
+{
+	return Attack;
+}

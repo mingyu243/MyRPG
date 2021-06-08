@@ -5,7 +5,6 @@
 #include "PlayerAnim.generated.h"
 
 DECLARE_MULTICAST_DELEGATE(FOnNextAttackCheckDelegate);
-DECLARE_MULTICAST_DELEGATE(FOnAttackHitCheckDelegate);
 
 UCLASS()
 class MYRPG_API UPlayerAnim : public UAnimInstance
@@ -19,7 +18,6 @@ public:
 	
 public:
 	FOnNextAttackCheckDelegate OnNextAttackCheck;
-	FOnAttackHitCheckDelegate OnAttackHitCheck;
 
 public:
 	void SetDeadAnim() { IsDead = true; }
@@ -43,8 +41,6 @@ private:
 	UAnimMontage* AttackMontage;
 
 private:
-	UFUNCTION()
-	void AnimNotify_AttackHitCheck();
 	UFUNCTION()
 	void AnimNotify_NextAttackCheck();
 	

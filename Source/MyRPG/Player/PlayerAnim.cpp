@@ -59,11 +59,6 @@ void UPlayerAnim::JumpToAttackMontageSection(int32 NewSection)
 	}
 }
 
-void UPlayerAnim::AnimNotify_AttackHitCheck()
-{
-	OnAttackHitCheck.Broadcast();
-}
-
 void UPlayerAnim::AnimNotify_NextAttackCheck()
 {
 	OnNextAttackCheck.Broadcast();

@@ -17,6 +17,7 @@ public:
 	virtual void PostInitializeComponents() override;
 
 public:
+	class UCharacterStatComponent* GetCharacterStat();
 	void SetWeapon(class AWeapon* NewWeapon);
 	void Attack();
 	UFUNCTION(Server, UnReliable)
@@ -31,6 +32,8 @@ private:
 	class UCameraComponent* Camera;
 	UPROPERTY(VisibleAnywhere)
 	class AWeapon* CurrentWeapon;
+	UPROPERTY(VisibleAnywhere)
+	class UCharacterStatComponent* CharacterStat;
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -63,7 +66,6 @@ private:
 	UFUNCTION()
 	void OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted);
 	void NextAttackCheck();
-	void AttackHitCheck();
 
 	void AttackStartComboState();
 	void AttackEndComboState();

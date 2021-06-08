@@ -3,6 +3,7 @@
 #include "../Main/Main_PC.h"
 #include "../Item/Weapon.h"
 #include "PlayerAnim.h"
+#include "CharacterStatComponent.h"
 
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
@@ -17,6 +18,7 @@ APlayer_Base::APlayer_Base()
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SPRINGARM"));
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CAMERA"));
+	CharacterStat = CreateDefaultSubobject<UCharacterStatComponent>(TEXT("CHARACTERSTAT"));
 	SpringArm->SetupAttachment(RootComponent);
 	Camera->SetupAttachment(SpringArm);
 
@@ -75,7 +77,6 @@ void APlayer_Base::PostInitializeComponents()
 	AnimBP = Cast<UPlayerAnim>(GetMesh()->GetAnimInstance());
 	AnimBP->OnMontageEnded.AddDynamic(this, &APlayer_Base::OnAttackMontageEnded);
 	AnimBP->OnNextAttackCheck.AddUObject(this, &APlayer_Base::NextAttackCheck);
-	AnimBP->OnAttackHitCheck.AddUObject(this, &APlayer_Base::AttackHitCheck);
 }
 
 void APlayer_Base::Attack()
@@ -110,6 +111,11 @@ void APlayer_Base::MC_Attack_Implementation()
 			}
 		}
 	}
+}
+
+UCharacterStatComponent* APlayer_Base::GetCharacterStat()
+{
+	return CharacterStat;
 }
 
 void APlayer_Base::SetWeapon(AWeapon* NewWeapon)
@@ -172,11 +178,6 @@ void APlayer_Base::NextAttackCheck()
 		AttackStartComboState();
 		AnimBP->JumpToAttackMontageSection(CurrentCombo);
 	}
-}
-
-void APlayer_Base::AttackHitCheck()
-{
-	// 공격.
 }
 
 void APlayer_Base::AttackStartComboState()

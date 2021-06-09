@@ -18,8 +18,8 @@ public:
 	virtual void PostInitializeComponents() override;
 
 public:
-	void SetWeapon(class AWeapon* NewWeapon);
-	class AWeapon* GetWeapon();
+	class UEquipmentComponent* GetEquipmentComponent();
+
 	void Attack();
 	UFUNCTION(Server, UnReliable)
 	void CtoS_Attack();
@@ -32,7 +32,7 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* Camera;
 	UPROPERTY(VisibleAnywhere)
-	class AWeapon* CurrentWeapon;
+	class UEquipmentComponent* Equipment;
 
 private:
 	UPROPERTY(VisibleAnywhere)

@@ -1,8 +1,9 @@
 ﻿#include "Player_Base.h"
 
+#include "PlayerAnim.h"
 #include "../../Main/Main_PC.h"
 #include "../../Item/Weapon.h"
-#include "PlayerAnim.h"
+#include "../../Component/EquipmentComponent.h"
 
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
@@ -17,6 +18,7 @@ APlayer_Base::APlayer_Base()
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SPRINGARM"));
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CAMERA"));
+	Equipment = CreateDefaultSubobject<UEquipmentComponent>(TEXT("EQUIPMENT")); // 대문자 단축키는 Ctrl + Shift + U.
 
 	SpringArm->SetupAttachment(RootComponent);
 	Camera->SetupAttachment(SpringArm);
@@ -49,7 +51,7 @@ void APlayer_Base::BeginPlay()
 	Super::BeginPlay();
 	
 	AWeapon* NewWeapon = GetWorld()->SpawnActor<AWeapon>(AWeapon::StaticClass(), FVector(-10.0f, 2.0f, 2.0f), FRotator(0.0f, 0.0f, -90.0f));
-	SetWeapon(NewWeapon);
+	Equipment->SetWeapon(NewWeapon);
 }
 
 void APlayer_Base::Tick(float DeltaTime)
@@ -76,6 +78,14 @@ void APlayer_Base::PostInitializeComponents()
 	AnimBP = Cast<UPlayerAnim>(GetMesh()->GetAnimInstance());
 	AnimBP->OnMontageEnded.AddDynamic(this, &APlayer_Base::OnAttackMontageEnded);
 	AnimBP->OnNextAttackCheck.AddUObject(this, &APlayer_Base::NextAttackCheck);
+
+	// 장비를 장착할 메쉬 설정.
+	Equipment->Init(GetMesh());
+}
+
+UEquipmentComponent* APlayer_Base::GetEquipmentComponent()
+{
+	return Equipment;
 }
 
 void APlayer_Base::Attack()
@@ -110,21 +120,6 @@ void APlayer_Base::MC_Attack_Implementation()
 			}
 		}
 	}
-}
-
-void APlayer_Base::SetWeapon(AWeapon* NewWeapon)
-{
-	if (NewWeapon == nullptr) return;
-
-	FName WeaponSocket(TEXT("hand_rSocket"));
-	NewWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, WeaponSocket);
-	NewWeapon->SetOwner(this);
-	CurrentWeapon = NewWeapon;
-}
-
-AWeapon* APlayer_Base::GetWeapon()
-{
-	return CurrentWeapon;
 }
 
 void APlayer_Base::LookUp(float AxisValue)

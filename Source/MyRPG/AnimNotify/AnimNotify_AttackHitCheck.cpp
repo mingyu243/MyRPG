@@ -1,7 +1,7 @@
 #include "AnimNotify_AttackHitCheck.h"
 
 #include "../Unit/Unit.h"
-#include "../Unit/CharacterStatComponent.h"
+#include "../Component/CharacterStatComponent.h"
 
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/GameplayStatics.h"

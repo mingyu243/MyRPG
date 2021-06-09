@@ -1,6 +1,6 @@
 #include "Unit.h"
 
-#include "CharacterStatComponent.h"
+#include "../Component/CharacterStatComponent.h"
 
 AUnit::AUnit()
 {

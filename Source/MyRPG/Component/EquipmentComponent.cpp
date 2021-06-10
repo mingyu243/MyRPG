@@ -21,6 +21,17 @@ UEquipmentComponent::UEquipmentComponent()
 	RightWeapon->SetRelativeLocationAndRotation(FVector(16.0f, 0.5f, -2.0f), FRotator(0.0f, -18.0f, 90.0f));
 	Backpack = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BACKPACK"));
 	LeftWeapon = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LEFTWEAPON"));
+
+	Face->SetupAttachment(BodyMesh);
+	Hair->SetupAttachment(BodyMesh);
+	Glove->SetupAttachment(BodyMesh);
+	Shoe->SetupAttachment(BodyMesh);
+	HeadGears->SetupAttachment(BodyMesh);
+	ShoulderPad->SetupAttachment(BodyMesh);
+	Belt->SetupAttachment(BodyMesh);
+
+	FName Socket_RightWeapon(TEXT("hand_rSocket"));
+	RightWeapon->SetupAttachment(BodyMesh, Socket_RightWeapon);
 }
 
 void UEquipmentComponent::BeginPlay()
@@ -32,9 +43,7 @@ void UEquipmentComponent::Init(USkeletalMeshComponent* NewBodyMesh)
 {
 	BodyMesh = NewBodyMesh;
 
-	Face->AttachToComponent(BodyMesh, FAttachmentTransformRules::KeepRelativeTransform);
-	FName WeaponSocket(TEXT("hand_rSocket"));
-	RightWeapon->AttachToComponent(BodyMesh, FAttachmentTransformRules::KeepRelativeTransform, WeaponSocket);
+
 }
 
 AWeapon* UEquipmentComponent::GetWeapon()
@@ -45,5 +54,5 @@ AWeapon* UEquipmentComponent::GetWeapon()
 void UEquipmentComponent::SetWeapon(AWeapon* NewWeapon)
 {
 	CurrentWeapon = NewWeapon;
-	//RightWeapon->SetStaticMesh(NewWeapon->GetWeaponMesh());
+	RightWeapon->SetStaticMesh(NewWeapon->GetWeaponMesh());
 }

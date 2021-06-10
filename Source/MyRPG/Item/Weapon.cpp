@@ -21,11 +21,11 @@ void AWeapon::BeginPlay()
 	
 }
 
-UStaticMeshComponent* AWeapon::GetWeaponMesh()
+UStaticMesh* AWeapon::GetWeaponMesh()
 {
 	// 여기 컴포넌트말고 Mesh만 들고있자. 컴포넌트 넘기면 안되징.
 	//return Mesh;
-	return nullptr;
+	return Mesh->GetStaticMesh();
 }
 
 EWeaponType AWeapon::GetWeaponType()

@@ -25,7 +25,7 @@ public:
 	virtual void BeginPlay() override;
 
 public:
-	class UStaticMeshComponent* GetWeaponMesh();
+	class UStaticMesh* GetWeaponMesh();
 	EWeaponType GetWeaponType();
 
 private:

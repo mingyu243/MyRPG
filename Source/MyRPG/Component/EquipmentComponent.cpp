@@ -54,5 +54,5 @@ AWeapon* UEquipmentComponent::GetWeapon()
 void UEquipmentComponent::SetWeapon(AWeapon* NewWeapon)
 {
 	CurrentWeapon = NewWeapon;
-	RightWeapon->SetStaticMesh(NewWeapon->GetWeaponMesh());
+	//RightWeapon->SetStaticMesh(NewWeapon->GetWeaponMesh());
 }

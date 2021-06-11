@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Item.h"
 #include "Weapon.generated.h"
 
 UENUM(BlueprintType)
@@ -16,7 +17,7 @@ enum class EWeaponType : uint8
 };
 
 UCLASS()
-class MYRPG_API AWeapon : public AActor
+class MYRPG_API AWeapon : public AItem
 {
 	GENERATED_BODY()
 	
@@ -25,13 +26,9 @@ public:
 	virtual void BeginPlay() override;
 
 public:
-	class UStaticMesh* GetWeaponMesh();
 	EWeaponType GetWeaponType();
 
 private:
-	UPROPERTY(VisibleAnywhere)
-	class UStaticMeshComponent* Mesh;
-
 	UPROPERTY(VisibleAnywhere)
 	EWeaponType WeaponType;
 };

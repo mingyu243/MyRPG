@@ -4,6 +4,7 @@
 #include "../../Main/Main_PC.h"
 #include "../../Item/Weapon.h"
 #include "../../Component/EquipmentComponent.h"
+#include "../../CustomDataTables.h"
 
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"

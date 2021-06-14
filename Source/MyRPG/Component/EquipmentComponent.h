@@ -15,8 +15,6 @@ enum class EArmorType : uint8
 	SHOULDERPAD
 };
 
-
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MYRPG_API UEquipmentComponent : public UActorComponent
 {

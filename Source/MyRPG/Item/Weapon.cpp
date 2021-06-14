@@ -1,9 +1,9 @@
 #include "Weapon.h"
 
+#include "../CustomDataTables.h"
+
 AWeapon::AWeapon()
 {
-
-	WeaponType = EWeaponType::SWORD_SHIELD;
 }
 
 void AWeapon::BeginPlay()
@@ -11,8 +11,7 @@ void AWeapon::BeginPlay()
 	Super::BeginPlay();
 }
 
-EWeaponType AWeapon::GetWeaponType()
+FWeaponData* AWeapon::GetWeaponData()
 {
-	return WeaponType;
+	return CurrentWeaponData;
 }
-

@@ -1,5 +1,7 @@
 #include "Item.h"
 
+#include "../CustomDataTables.h"
+
 AItem::AItem()
 {
 

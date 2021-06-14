@@ -19,4 +19,10 @@ public:
 private:
 	UPROPERTY(VisibleAnywhere)
 	class UStaticMeshComponent* PreviewMesh;
+
+	UPROPERTY(VisibleAnywhere)
+	int32 CurrentItemIndex;
+
+private:
+	void SetPreviewMesh(class UStaticMesh* Mesh);
 };

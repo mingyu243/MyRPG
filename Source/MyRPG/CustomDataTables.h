@@ -2,8 +2,45 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
-#include "Item/Item.h"
 #include "CustomDataTables.generated.h"
+
+UENUM(BlueprintType)
+enum class EWeaponType : uint8
+{
+	NO_WEAPON,
+	SWORD_SHIELD,
+	TWO_HAND_SWORD,
+	BOW,
+	DOUBLE_SWORD,
+	MAGIC_WAND
+};
+
+USTRUCT(BlueprintType)
+struct FWeaponData : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+	FWeaponData() : Enum_WeaponType(EWeaponType::NO_WEAPON), Path_AM_BasicAttack(TEXT("")), Range(0) {}
+
+	// 데이터 테이블에서의 키 값.
+	// int32 Index;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	EWeaponType Enum_WeaponType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString Path_AM_BasicAttack;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Range;
+};
+
+UENUM(BlueprintType)
+enum class EItemType : uint8
+{
+	POTION,
+	ARMOR,
+	WEAPON
+};
 
 USTRUCT(BlueprintType)
 struct FItemData : public FTableRowBase
@@ -11,7 +48,7 @@ struct FItemData : public FTableRowBase
 	GENERATED_BODY()
 
 public:
-	FItemData() : Name(TEXT("DefaultName")), Description(TEXT("DefaultDescription")), Path_Icon(TEXT("")), Path_Mesh(TEXT("")) {}
+	FItemData() : Name(TEXT("DefaultName")), Description(TEXT("DefaultDescription")), Enum_ItemType(EItemType::ARMOR), Path_Icon(TEXT("")), Path_Mesh(TEXT("")) {}
 	
 	// 데이터 테이블에서의 키 값.
 	// int32 Index;

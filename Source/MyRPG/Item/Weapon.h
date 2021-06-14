@@ -5,17 +5,6 @@
 #include "Item.h"
 #include "Weapon.generated.h"
 
-UENUM(BlueprintType)
-enum class EWeaponType : uint8
-{
-	NO_WEAPON,
-	SWORD_SHIELD,
-	TWO_HAND_SWORD,
-	BOW,
-	DOUBLE_SWORD,
-	MAGIC_WAND
-};
-
 UCLASS()
 class MYRPG_API AWeapon : public AItem
 {
@@ -26,9 +15,8 @@ public:
 	virtual void BeginPlay() override;
 
 public:
-	EWeaponType GetWeaponType();
+	struct FWeaponData* GetWeaponData();
 
 private:
-	UPROPERTY(VisibleAnywhere)
-	EWeaponType WeaponType;
+	struct FWeaponData* CurrentWeaponData;
 };

@@ -4,14 +4,6 @@
 #include "GameFramework/Actor.h"
 #include "Item.generated.h"
 
-UENUM(BlueprintType)
-enum class EItemType : uint8
-{
-	POTION,
-	ARMOR,
-	WEAPON
-};
-
 UCLASS()
 class MYRPG_API AItem : public AActor
 {

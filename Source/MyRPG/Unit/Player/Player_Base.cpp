@@ -53,6 +53,9 @@ void APlayer_Base::BeginPlay()
 	
 	AWeapon* NewWeapon = GetWorld()->SpawnActor<AWeapon>(AWeapon::StaticClass(), FVector(-10.0f, 2.0f, 2.0f), FRotator(0.0f, 0.0f, -90.0f));
 	Equipment->SetWeapon(NewWeapon);
+
+	AMain_PC* PC = Cast<AMain_PC>(GetController());
+	// PC->GetHUDWidget()->BindCharacterStat(CharacterStat); 스텟 바인딩하기.
 }
 
 void APlayer_Base::Tick(float DeltaTime)

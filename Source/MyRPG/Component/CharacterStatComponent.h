@@ -4,6 +4,8 @@
 #include "Components/ActorComponent.h"
 #include "CharacterStatComponent.generated.h"
 
+DECLARE_MULTICAST_DELEGATE(FOnHPChangedDelegate);
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MYRPG_API UCharacterStatComponent : public UActorComponent
 {
@@ -17,7 +19,10 @@ public:
 public:
 	void Attacked(float Damage);
 	void SetHP(float NewHP);
+	float GetHPRatio();
 	float GetDamage();
+
+	FOnHPChangedDelegate OnHPChanged;
 
 private:
 	UPROPERTY(VisibleAnywhere)

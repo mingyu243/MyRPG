@@ -7,11 +7,9 @@
 UENUM(BlueprintType)
 enum class EWeaponType : uint8
 {
-	NO_WEAPON,
-	SWORD_SHIELD,
-	TWO_HAND_SWORD,
+	SWORD,
+	SHIELD,
 	BOW,
-	DOUBLE_SWORD,
 	MAGIC_WAND
 };
 
@@ -21,7 +19,7 @@ struct FWeaponData : public FTableRowBase
 	GENERATED_BODY()
 
 public:
-	FWeaponData() : Enum_WeaponType(EWeaponType::NO_WEAPON), Path_AM_BasicAttack(TEXT("")), Range(0) {}
+	FWeaponData() : Enum_WeaponType(EWeaponType::SWORD), Path_AM_BasicAttack(TEXT("")), Range(0) {}
 
 	// 데이터 테이블에서의 키 값.
 	// int32 Index;

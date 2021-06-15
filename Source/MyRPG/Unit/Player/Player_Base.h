@@ -5,6 +5,17 @@
 #include "../Unit.h"
 #include "Player_Base.generated.h"
 
+UENUM(BlueprintType)
+enum class ECombatType : uint8
+{
+	NO_WEAPON,
+	SWORD_SHIELD,
+	TWO_HAND_SWORD,
+	DOUBLE_SWORD,
+	BOW,
+	MAGIC_WAND
+};
+
 UCLASS()
 class MYRPG_API APlayer_Base : public AUnit
 {

@@ -26,10 +26,16 @@ void UCharacterStatComponent::Attacked(float Damage)
 void UCharacterStatComponent::SetHP(float NewHP)
 {
 	CurrentHP = NewHP;
+	OnHPChanged.Broadcast();
 	if (CurrentHP < KINDA_SMALL_NUMBER)
 	{
 		CurrentHP = 0.0f;
 	}
+}
+
+float UCharacterStatComponent::GetHPRatio()
+{
+	return (CurrentHP / MaxHP);
 }
 
 float UCharacterStatComponent::GetDamage()

@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
-#include "../../CustomDataTables.h"
+#include "Player_Base.h"
 #include "PlayerAnim.generated.h"
 
 DECLARE_MULTICAST_DELEGATE(FOnNextAttackCheckDelegate);
@@ -27,7 +27,7 @@ public:
 
 private:
 	UPROPERTY(VisibleAnywhere)
-	class APlayer_Base* Player;
+	APlayer_Base* Player;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Meta = (AllowPrivateAccess = true))
 	float Speed;
@@ -38,7 +38,7 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Meta = (AllowPrivateAccess = true))
 	bool IsDead;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Meta = (AllowPrivateAccess = true))
-	EWeaponType CurrentWeaponType;
+	ECombatType CurrentCombatType;
 	
 	UPROPERTY(VisibleAnywhere)
 	UAnimMontage* AttackMontage;

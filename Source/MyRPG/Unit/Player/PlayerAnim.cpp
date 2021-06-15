@@ -12,11 +12,12 @@ UPlayerAnim::UPlayerAnim()
 	bIsInAir = false;
 	IsDead = false;
 
-	static ConstructorHelpers::FObjectFinder<UAnimMontage> AM_Attack(TEXT("AnimMontage'/Game/Blueprints/Player/Animation/Combo_SwordShield.Combo_SwordShield'"));
-	if (AM_Attack.Succeeded())
+	static ConstructorHelpers::FObjectFinder<UAnimMontage> AM_Attack_SwordShield(TEXT("AnimMontage'/Game/Blueprints/Player/Animation/Sword_Shield/Combo_SwordShield.Combo_SwordShield'"));
+	if (AM_Attack_SwordShield.Succeeded())
 	{
-		AttackMontage = AM_Attack.Object;
+		AttackMontage = AM_Attack_SwordShield.Object;
 	}
+	CurrentCombatType = ECombatType::TWO_HAND_SWORD;
 }
 
 void UPlayerAnim::NativeBeginPlay()
@@ -43,7 +44,7 @@ void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)
 	Direction = CalculateDirection(Player->GetVelocity(), Player->GetActorRotation());
 
 	bIsInAir = Player->GetCharacterMovement()->IsFalling();
-	//CurrentWeaponType = Player->GetEquipmentComponent()->GetWeapon()->GetWeaponData()->Enum_WeaponType;
+	// CurrentCombatType = Player->GetEquipmentComponent()->GetWeapon()->GetWeaponData()->Enum_WeaponType;
 }
 
 void UPlayerAnim::PlayAttackMontage()

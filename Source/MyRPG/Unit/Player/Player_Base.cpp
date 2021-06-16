@@ -2,6 +2,7 @@
 
 #include "PlayerAnim.h"
 #include "../../Main/Main_PC.h"
+#include "../../Main/Main_HUD.h"
 #include "../../Item/Weapon.h"
 #include "../../Component/EquipmentComponent.h"
 #include "../../CustomDataTables.h"
@@ -54,8 +55,15 @@ void APlayer_Base::BeginPlay()
 	AWeapon* NewWeapon = GetWorld()->SpawnActor<AWeapon>(AWeapon::StaticClass(), FVector(-10.0f, 2.0f, 2.0f), FRotator(0.0f, 0.0f, -90.0f));
 	Equipment->SetWeapon(NewWeapon);
 
-	AMain_PC* PC = Cast<AMain_PC>(GetController());
-	// PC->GetHUDWidget()->BindCharacterStat(CharacterStat); 스텟 바인딩하기.
+	AMain_PC* PC = Cast<AMain_PC>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	if (PC)
+	{
+		AMain_HUD* HUD = Cast<AMain_HUD>(PC->GetHUD());
+		if (HUD)
+		{
+			HUD->BindCharacterStat(GetCharacterStat());
+		}
+	}
 }
 
 void APlayer_Base::Tick(float DeltaTime)

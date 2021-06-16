@@ -11,7 +11,6 @@ void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 	
-
 }
 
 void AItem::Use()

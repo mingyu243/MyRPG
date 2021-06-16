@@ -19,7 +19,7 @@ struct FWeaponData : public FTableRowBase
 	GENERATED_BODY()
 
 public:
-	FWeaponData() : Enum_WeaponType(EWeaponType::SWORD), Path_AM_BasicAttack(TEXT("")), Range(0) {}
+	FWeaponData() : Enum_WeaponType(EWeaponType::SWORD), Path_AM_BasicAttack(TEXT("")){}
 
 	// 데이터 테이블에서의 키 값.
 	// int32 Index;
@@ -28,16 +28,13 @@ public:
 	EWeaponType Enum_WeaponType;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString Path_AM_BasicAttack;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	int32 Range;
 };
 
 UENUM(BlueprintType)
 enum class EItemType : uint8
 {
 	POTION,
-	ARMOR,
-	WEAPON
+	EQUIPMENT
 };
 
 USTRUCT(BlueprintType)
@@ -46,7 +43,7 @@ struct FItemData : public FTableRowBase
 	GENERATED_BODY()
 
 public:
-	FItemData() : Name(TEXT("DefaultName")), Description(TEXT("DefaultDescription")), Enum_ItemType(EItemType::ARMOR), Path_Icon(TEXT("")), Path_Mesh(TEXT("")) {}
+	FItemData() : Name(TEXT("DefaultName")), Description(TEXT("DefaultDescription")), Enum_ItemType(EItemType::EQUIPMENT), Path_Icon(TEXT("")), Path_Mesh(TEXT("")) {}
 	
 	// 데이터 테이블에서의 키 값.
 	// int32 Index;

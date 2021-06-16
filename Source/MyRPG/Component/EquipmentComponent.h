@@ -12,7 +12,8 @@ enum class EArmorType : uint8
 	GLOVE,
 	SHOE,
 	HEADGEARS,
-	SHOULDERPAD
+	SHOULDERPAD,
+	BELT
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )

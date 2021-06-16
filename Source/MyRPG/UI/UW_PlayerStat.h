@@ -20,6 +20,8 @@ private:
 	class UTextBlock* PlayerName;
 	UPROPERTY(Meta = (BindWidget))
 	class UProgressBar* HPBar;
+	UPROPERTY(Meta = (BindWidget))
+	class UTextBlock* HPText;
 
 private:
 	void UpdateCharacterStat();

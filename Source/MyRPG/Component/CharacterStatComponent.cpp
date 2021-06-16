@@ -3,6 +3,8 @@
 UCharacterStatComponent::UCharacterStatComponent()
 {
 	Attack = 10;
+	MaxHP = 100;
+	CurrentHP = MaxHP;
 }
 
 void UCharacterStatComponent::BeginPlay()
@@ -31,6 +33,16 @@ void UCharacterStatComponent::SetHP(float NewHP)
 	{
 		CurrentHP = 0.0f;
 	}
+}
+
+float UCharacterStatComponent::GetMaxHP()
+{
+	return MaxHP;
+}
+
+float UCharacterStatComponent::GetCurrentHP()
+{
+	return CurrentHP;
 }
 
 float UCharacterStatComponent::GetHPRatio()

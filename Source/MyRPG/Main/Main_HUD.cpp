@@ -25,6 +25,13 @@ void AMain_HUD::AddChatMessage(const FString& Message)
 	MainUIObject->AddChatMessage(Message);
 }
 
+void AMain_HUD::BindCharacterStat(UCharacterStatComponent* CharacterStat)
+{
+	if (!CheckUIObject()) return;
+
+	MainUIObject->BindCharacterStat(CharacterStat);
+}
+
 TSharedPtr<SWidget> AMain_HUD::GetChatInputTextObject()
 {
 	return MainUIObject->GetChatInputTextObject();

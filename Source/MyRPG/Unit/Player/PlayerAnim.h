@@ -39,13 +39,22 @@ private:
 	bool IsDead;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Meta = (AllowPrivateAccess = true))
 	ECombatType CurrentCombatType;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Meta = (AllowPrivateAccess = true))
+	UAnimMontage* CurrentAttackMontage;
 	
 	UPROPERTY(VisibleAnywhere)
-	UAnimMontage* AttackMontage;
+	UAnimMontage* AM_SwordShield;
+	UPROPERTY(VisibleAnywhere)
+	UAnimMontage* AM_DoubleSword;
+	UPROPERTY(VisibleAnywhere)
+	UAnimMontage* AM_TwoHandSword;
 
 private:
 	UFUNCTION()
 	void AnimNotify_NextAttackCheck();
 	
 	FName GetAttackMontageSectionName(int32 Section);
+
+	UFUNCTION()
+	void CheckCombatType();
 };

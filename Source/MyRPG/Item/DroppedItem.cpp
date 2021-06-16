@@ -18,7 +18,7 @@ void ADroppedItem::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetItem(100);
+	SetItem(213);
 }
 
 void ADroppedItem::SetItem(int32 index)

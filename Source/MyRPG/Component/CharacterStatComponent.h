@@ -19,6 +19,8 @@ public:
 public:
 	void Attacked(float Damage);
 	void SetHP(float NewHP);
+	float GetMaxHP();
+	float GetCurrentHP();
 	float GetHPRatio();
 	float GetDamage();
 

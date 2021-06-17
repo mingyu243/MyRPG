@@ -22,7 +22,8 @@ public:
 	float GetMaxHP();
 	float GetCurrentHP();
 	float GetHPRatio();
-	float GetDamage();
+	float GetAttack();
+	float GetFinalDamage(float DamageStatic = 0.0f, float DamageMul = 1.0f);
 
 	FOnHPChangedDelegate OnHPChanged;
 

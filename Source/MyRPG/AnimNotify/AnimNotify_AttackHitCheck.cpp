@@ -30,7 +30,7 @@ void UAnimNotify_AttackHitCheck::Notify(USkeletalMeshComponent* MeshComp, UAnimS
 	{
 		for (AActor* OutActor : OutActors)
 		{
-			float DamagePower = DamageStatic + (MyUnit->GetCharacterStat()->GetDamage() * DamageMul);
+			float DamagePower = MyUnit->GetCharacterStat()->GetFinalDamage(DamageStatic, DamageMul);
 			UE_LOG(LogClass, Warning, TEXT("ApplyDamage : %f"), DamagePower);
 			UGameplayStatics::ApplyDamage(OutActor, DamagePower, MyUnit->GetController(), nullptr, NULL);
 		}

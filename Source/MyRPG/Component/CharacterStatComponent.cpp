@@ -50,7 +50,12 @@ float UCharacterStatComponent::GetHPRatio()
 	return (CurrentHP / MaxHP);
 }
 
-float UCharacterStatComponent::GetDamage()
+float UCharacterStatComponent::GetAttack()
 {
 	return Attack;
+}
+
+float UCharacterStatComponent::GetFinalDamage(float DamageStatic, float DamageMul)
+{
+	return DamageStatic + (GetAttack() * DamageMul); // 나중에 방어력 계산도 할 듯?
 }

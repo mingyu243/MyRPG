@@ -52,10 +52,10 @@ float UCharacterStatComponent::GetHPRatio()
 
 float UCharacterStatComponent::GetAttack()
 {
-	return Attack;
+	return Attack; // 나중에 장비에 의한 공격력 계산도 할 듯 ?
 }
 
 float UCharacterStatComponent::GetFinalDamage(float DamageStatic, float DamageMul)
 {
-	return DamageStatic + (GetAttack() * DamageMul); // 나중에 방어력 계산도 할 듯?
+	return DamageStatic + (GetAttack() * DamageMul); 
 }

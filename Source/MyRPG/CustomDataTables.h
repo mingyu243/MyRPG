@@ -19,15 +19,48 @@ struct FWeaponData : public FTableRowBase
 	GENERATED_BODY()
 
 public:
-	FWeaponData() : Enum_WeaponType(EWeaponType::SWORD), Path_AM_BasicAttack(TEXT("")){}
+	FWeaponData() : Enum_WeaponType(EWeaponType::SWORD), Path_AM_BasicAttackCombo(TEXT("")){}
 
-	// 데이터 테이블에서의 키 값.
-	// int32 Index;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Index;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	EWeaponType Enum_WeaponType;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FString Path_AM_BasicAttack;
+	FString Path_AM_BasicAttackCombo;
+};
+
+UENUM(BlueprintType)
+enum class EEquipmentType : uint8
+{
+	// Armor
+	FACE,
+	HAIR,
+	GLOVE,
+	SHOE,
+	HEADGEARS,
+	SHOULDERPAD,
+	BELT,
+
+	// Weapon
+	WEAPON
+};
+
+USTRUCT(BlueprintType)
+struct FEquipmentData : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+	FEquipmentData() : Index(100), Enum_EquipmentType(EEquipmentType::FACE), Stat_Defense(0) {}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Index;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	EEquipmentType Enum_EquipmentType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Stat_Defense;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Stat_HP;
 };
 
 UENUM(BlueprintType)
@@ -43,13 +76,14 @@ struct FItemData : public FTableRowBase
 	GENERATED_BODY()
 
 public:
-	FItemData() : Name(TEXT("DefaultName")), Description(TEXT("DefaultDescription")), Enum_ItemType(EItemType::EQUIPMENT), Path_Icon(TEXT("")), Path_Mesh(TEXT("")) {}
+	FItemData() : Index(100), ItemName(TEXT("DefaultName")), Description(TEXT("DefaultDescription")), Enum_ItemType(EItemType::EQUIPMENT), Path_Icon(TEXT("")), Path_Mesh(TEXT("")) {}
 	
-	// 데이터 테이블에서의 키 값.
-	// int32 Index;
+	// 데이터 테이블에서의 키 값은 더미 값으로 만들었다.
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FName Name;
+	int32 Index;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FName ItemName;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FName Description;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")

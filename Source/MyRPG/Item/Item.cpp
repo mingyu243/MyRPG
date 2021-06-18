@@ -1,16 +1,17 @@
 #include "Item.h"
 
+#include "../MyGameInstance.h"
 #include "../CustomDataTables.h"
 
-AItem::AItem()
-{
+#include "Engine/Engine.h"
 
-}
-
-void AItem::BeginPlay()
+void AItem::Init(int32 index)
 {
-	Super::BeginPlay();
-	
+	UMyGameInstance* GI = Cast<UMyGameInstance>(GetGameInstance());
+	if (GI)
+	{
+		CurrentItemData = GI->GetItemData(index);
+	}
 }
 
 void AItem::Use()

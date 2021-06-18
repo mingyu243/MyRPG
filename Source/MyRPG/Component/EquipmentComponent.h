@@ -4,18 +4,6 @@
 #include "Components/ActorComponent.h"
 #include "EquipmentComponent.generated.h"
 
-UENUM(BlueprintType)
-enum class EArmorType : uint8
-{
-	FACE,
-	HAIR,
-	GLOVE,
-	SHOE,
-	HEADGEARS,
-	SHOULDERPAD,
-	BELT
-};
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MYRPG_API UEquipmentComponent : public UActorComponent
 {

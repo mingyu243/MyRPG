@@ -9,11 +9,8 @@ class MYRPG_API AItem : public AActor
 {
 	GENERATED_BODY()
 	
-public:	
-	AItem();
-	virtual void BeginPlay() override;
-
 public:
+	virtual void Init(int32 index);
 	virtual void Use();
 
 public:

@@ -1,18 +1,17 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
-#include "Item.h"
+#include "Equipment.h"
 #include "Weapon.generated.h"
 
 UCLASS()
-class MYRPG_API AWeapon : public AItem
+class MYRPG_API AWeapon : public AEquipment
 {
 	GENERATED_BODY()
 	
-public:	
-	AWeapon();
-	virtual void BeginPlay() override;
+public:
+	virtual void Init(int32 index) override;
+	virtual void Use() override;
 
 public:
 	struct FWeaponData* GetWeaponData();

@@ -2,11 +2,11 @@
 
 #include "../MyGameInstance.h"
 #include "../CustomDataTables.h"
+#include "Item.h"
 
 #include "Components/StaticMeshComponent.h"
 #include "Engine/StaticMesh.h"
 #include "Engine/Engine.h"
-#include "Engine/StreamableManager.h"
 
 ADroppedItem::ADroppedItem()
 {
@@ -17,19 +17,17 @@ ADroppedItem::ADroppedItem()
 void ADroppedItem::BeginPlay()
 {
 	Super::BeginPlay();
-
-	SetItem(213);
 }
 
-void ADroppedItem::SetItem(int32 index)
+void ADroppedItem::SetItem(AItem* Item)
 {
-	CurrentItemIndex = index;
+	if (Item == nullptr) return;
 
-	// 게임인스턴스에서 받아옴.
+	CurrentItem = Item;
 	UMyGameInstance* GI = Cast<UMyGameInstance>(GetGameInstance());
 	if (GI)
 	{
-		UStaticMesh* LoadedMesh = LoadObject<UStaticMesh>(NULL, *(GI->GetItemData(CurrentItemIndex)->Path_Mesh));
+		UStaticMesh* LoadedMesh = LoadObject<UStaticMesh>(NULL, *(GI->GetItemData(Item->GetItemData()->Index)->Path_Mesh));
 		if (LoadedMesh)
 		{
 			SetPreviewMesh(LoadedMesh);

@@ -2,13 +2,14 @@
 
 #include "../CustomDataTables.h"
 
-AWeapon::AWeapon()
+void AWeapon::Init(int32 index)
 {
+	Super::Init(index);
 }
 
-void AWeapon::BeginPlay()
+void AWeapon::Use()
 {
-	Super::BeginPlay();
+	Super::Use();
 }
 
 FWeaponData* AWeapon::GetWeaponData()

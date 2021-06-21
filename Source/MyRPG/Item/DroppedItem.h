@@ -14,14 +14,14 @@ public:
 	virtual void BeginPlay() override;
 
 public:
-	void SetItem(class AItem* Item);
+	void SetItem(class UItem* Item);
 
 private:
 	UPROPERTY(VisibleAnywhere)
 	class UStaticMeshComponent* PreviewMesh;
 
 private:
-	class AItem* CurrentItem;
+	class UItem* CurrentItem;
 
 private:
 	void SetPreviewMesh(class UStaticMesh* Mesh);

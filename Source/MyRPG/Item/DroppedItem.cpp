@@ -19,7 +19,7 @@ void ADroppedItem::BeginPlay()
 	Super::BeginPlay();
 }
 
-void ADroppedItem::SetItem(AItem* Item)
+void ADroppedItem::SetItem(UItem* Item)
 {
 	if (Item == nullptr) return;
 

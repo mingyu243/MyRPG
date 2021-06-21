@@ -40,6 +40,7 @@ enum class EEquipmentType : uint8
 	HEADGEARS,
 	SHOULDERPAD,
 	BELT,
+	BACKPACK,
 
 	// Weapon
 	WEAPON

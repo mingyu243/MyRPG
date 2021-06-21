@@ -18,6 +18,7 @@ void AMain_PC::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	InputComponent->BindAction(TEXT("Chat"), EInputEvent::IE_Pressed, this, &AMain_PC::FocusChatInputText);
+	InputComponent->BindAction(TEXT("ToggleInventory"), EInputEvent::IE_Pressed, this, &AMain_PC::ToggleInventory);
 }
 
 void AMain_PC::SendMessage(const FText& Text)
@@ -68,4 +69,12 @@ void AMain_PC::StoC_SendMessage_Implementation(const FString& Message)
 	if (HUD == nullptr) return;
 
 	HUD->AddChatMessage(Message);
+}
+
+void AMain_PC::ToggleInventory()
+{
+	AMain_HUD* HUD = GetHUD<AMain_HUD>();
+	if (HUD == nullptr) return;
+
+	HUD->ToggleInventory();
 }

@@ -5,13 +5,13 @@
 #include "Equipment.generated.h"
 
 UCLASS()
-class MYRPG_API AEquipment : public AItem
+class MYRPG_API UEquipment : public UItem
 {
 	GENERATED_BODY()
 	
 public:
 	virtual void Init(int32 index) override;
-	virtual void Use() override;
+	virtual void Use(class APlayer_Base* Character) override;
 
 public:
 	struct FEquipmentData* GetEquipmentData();

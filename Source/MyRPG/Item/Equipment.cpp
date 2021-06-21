@@ -1,16 +1,27 @@
 #include "Equipment.h"
 
-void AEquipment::Init(int32 index)
+#include "../MyGameInstance.h"
+#include "../CustomDataTables.h"
+
+#include "Kismet/GameplayStatics.h"
+
+void UEquipment::Init(int32 index)
 {
 	Super::Init(index);
+
+	UMyGameInstance* GI = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	if (GI)
+	{
+		CurrentEquipmentData = GI->GetEquipmentData(index);
+	}
 }
 
-void AEquipment::Use()
+void UEquipment::Use(APlayer_Base* Character)
 {
-	Super::Use();
+	Super::Use(Character);
 }
 
-FEquipmentData* AEquipment::GetEquipmentData()
+FEquipmentData* UEquipment::GetEquipmentData()
 {
 	return CurrentEquipmentData;
 }

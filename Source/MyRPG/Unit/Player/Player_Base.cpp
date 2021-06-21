@@ -5,6 +5,7 @@
 #include "../../Main/Main_HUD.h"
 #include "../../Item/Weapon.h"
 #include "../../Component/EquipmentComponent.h"
+#include "../../Component/InventoryComponent.h"
 #include "../../CustomDataTables.h"
 
 #include "GameFramework/SpringArmComponent.h"
@@ -21,6 +22,7 @@ APlayer_Base::APlayer_Base()
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SPRINGARM"));
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CAMERA"));
 	Equipment = CreateDefaultSubobject<UEquipmentComponent>(TEXT("EQUIPMENT")); // 대문자 단축키는 Ctrl + Shift + U.
+	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("INVENTORY"));
 
 	SpringArm->SetupAttachment(RootComponent);
 	Camera->SetupAttachment(SpringArm);
@@ -52,8 +54,8 @@ void APlayer_Base::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	AWeapon* NewWeapon = GetWorld()->SpawnActor<AWeapon>(AWeapon::StaticClass(), FVector(-10.0f, 2.0f, 2.0f), FRotator(0.0f, 0.0f, -90.0f));
-	Equipment->SetWeapon(NewWeapon);
+	//AWeapon* NewWeapon = GetWorld()->SpawnActor<AWeapon>(AWeapon::StaticClass(), FVector(-10.0f, 2.0f, 2.0f), FRotator(0.0f, 0.0f, -90.0f));
+	//Equipment->SetWeapon(NewWeapon);
 
 	AMain_PC* PC = Cast<AMain_PC>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
 	if (PC)
@@ -100,6 +102,11 @@ UEquipmentComponent* APlayer_Base::GetEquipmentComponent()
 	return Equipment;
 }
 
+class UInventoryComponent* APlayer_Base::GetInventoryComponent()
+{
+	return Inventory;
+}
+
 void APlayer_Base::Attack()
 {
 	CtoS_Attack();
@@ -131,6 +138,14 @@ void APlayer_Base::MC_Attack_Implementation()
 				IsComboInputOn = true;
 			}
 		}
+	}
+}
+
+void APlayer_Base::UseItem(UItem* Item)
+{
+	if (Item)
+	{
+		Item->Use(this);
 	}
 }
 

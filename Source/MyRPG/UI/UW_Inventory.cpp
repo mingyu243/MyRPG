@@ -1,6 +1,8 @@
 #include "UW_Inventory.h"
 
 #include "UW_InventorySlot.h"
+#include "../Unit/Player/Player_Base.h"
+#include "../Component/InventoryComponent.h"
 
 #include "Components/UniformGridPanel.h"
 #include "Components/UniformGridSlot.h"
@@ -17,6 +19,36 @@ void UUW_Inventory::NativeConstruct()
 	{
 		CreateSlot();
 	}
+
+	// Cast<APlayer_Base>(GetOwningPlayerPawn())->GetInventoryComponent()->OnInventoryUpdated;
+}
+
+void UUW_Inventory::BindInventory(UInventoryComponent* Inventory)
+{
+	if (Inventory == nullptr) return;
+	CurrentInventory = Inventory;
+
+	//CurrentInventory->OnInventoryUpdated.AddUObject(this, )
+
+}
+
+//void UUW_PlayerStat::BindCharacterStat(UCharacterStatComponent* CharacterStat)
+//{
+//	if (CharacterStat == nullptr) return;
+//	CurrentCharacterStat = CharacterStat;
+//	UpdateCharacterStat();
+//
+//	CharacterStat->OnHPChanged.AddUObject(this, &UUW_PlayerStat::UpdateCharacterStat);
+//}
+
+void UUW_Inventory::InitializeInventory()
+{
+
+}
+
+void UUW_Inventory::RefreshInventory()
+{
+
 }
 
 void UUW_Inventory::CreateSlot()

@@ -30,12 +30,16 @@ public:
 
 public:
 	class UEquipmentComponent* GetEquipmentComponent();
+	class UInventoryComponent* GetInventoryComponent();
 
 	void Attack();
 	UFUNCTION(Server, UnReliable)
 	void CtoS_Attack();
 	UFUNCTION(NetMulticast, UnReliable)
 	void MC_Attack();
+
+	UFUNCTION()
+	void UseItem(class UItem* Item);
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -44,6 +48,8 @@ private:
 	class UCameraComponent* Camera;
 	UPROPERTY(VisibleAnywhere)
 	class UEquipmentComponent* Equipment;
+	UPROPERTY(VisibleAnywhere)
+	class UInventoryComponent* Inventory;
 
 private:
 	UPROPERTY(VisibleAnywhere)

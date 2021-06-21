@@ -3,23 +3,22 @@
 #include "../MyGameInstance.h"
 #include "../CustomDataTables.h"
 
-#include "Engine/Engine.h"
+#include "Kismet/GameplayStatics.h"
 
-void AItem::Init(int32 index)
+void UItem::Init(int32 index)
 {
-	UMyGameInstance* GI = Cast<UMyGameInstance>(GetGameInstance());
+	UMyGameInstance* GI = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	if (GI)
 	{
 		CurrentItemData = GI->GetItemData(index);
 	}
 }
 
-void AItem::Use()
-{
-	UE_LOG(LogClass, Warning, TEXT("Item Use"));
-}
-
-FItemData* AItem::GetItemData()
+FItemData* UItem::GetItemData()
 {
 	return CurrentItemData;
+}
+
+void UItem::Use(APlayer_Base* Character)
+{
 }

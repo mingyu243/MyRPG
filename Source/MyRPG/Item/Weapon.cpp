@@ -1,18 +1,27 @@
 #include "Weapon.h"
 
+#include "../MyGameInstance.h"
 #include "../CustomDataTables.h"
 
-void AWeapon::Init(int32 index)
+#include "Kismet/GameplayStatics.h"
+
+void UWeapon::Init(int32 index)
 {
 	Super::Init(index);
+
+	UMyGameInstance* GI = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	if (GI)
+	{
+		CurrentWeaponData = GI->GetWeaponData(index);
+	}
 }
 
-void AWeapon::Use()
+void UWeapon::Use(APlayer_Base* Character)
 {
-	Super::Use();
+	Super::Use(Character);
 }
 
-FWeaponData* AWeapon::GetWeaponData()
+FWeaponData* UWeapon::GetWeaponData()
 {
 	return CurrentWeaponData;
 }

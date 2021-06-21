@@ -12,6 +12,8 @@ class MYRPG_API UMyGameInstance : public UGameInstance
 public:
 	UMyGameInstance();
 	struct FItemData* GetItemData(int32 Index);
+	struct FEquipmentData* GetEquipmentData(int32 Index);
+	struct FWeaponData* GetWeaponData(int32 Index);
 	
 public:
 	void SetUserName(FString NewUserName);
@@ -22,4 +24,8 @@ private:
 
 	UPROPERTY()
 	class UDataTable* ItemDataTable;
+	UPROPERTY()
+	class UDataTable* EquipmentDataTable;
+	UPROPERTY()
+	class UDataTable* WeaponDataTable;
 };

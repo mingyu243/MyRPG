@@ -47,6 +47,6 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	class UStaticMeshComponent* LeftWeapon;
 
-	UPROPERTY(VisibleAnywhere)
-	class AWeapon* CurrentWeapon;
+	//UPROPERTY(VisibleAnywhere)
+	//class AWeapon* CurrentWeapon;
 };

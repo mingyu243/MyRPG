@@ -48,11 +48,11 @@ void UEquipmentComponent::Init(USkeletalMeshComponent* NewBodyMesh)
 
 AWeapon* UEquipmentComponent::GetWeapon()
 {
-	return CurrentWeapon;
+	return nullptr;//CurrentWeapon;
 }
 
 void UEquipmentComponent::SetWeapon(AWeapon* NewWeapon)
 {
-	CurrentWeapon = NewWeapon;
+	//CurrentWeapon = NewWeapon;
 	//RightWeapon->SetStaticMesh(NewWeapon->GetWeaponMesh());
 }

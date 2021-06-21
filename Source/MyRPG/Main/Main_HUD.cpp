@@ -25,11 +25,23 @@ void AMain_HUD::AddChatMessage(const FString& Message)
 	MainUIObject->AddChatMessage(Message);
 }
 
+void AMain_HUD::ToggleInventory()
+{
+	MainUIObject->ShowInventory(!(MainUIObject->isShowInventory()));
+}
+
 void AMain_HUD::BindCharacterStat(UCharacterStatComponent* CharacterStat)
 {
 	if (!CheckUIObject()) return;
 
 	MainUIObject->BindCharacterStat(CharacterStat);
+}
+
+void AMain_HUD::BindInventory(class UInventoryComponent* Inventory)
+{
+	if (!CheckUIObject()) return;
+
+
 }
 
 TSharedPtr<SWidget> AMain_HUD::GetChatInputTextObject()

@@ -6,17 +6,36 @@
 
 UMyGameInstance::UMyGameInstance()
 {
-	FString ItemDataPath = TEXT("DataTable'/Game/Blueprints/DataTable/ItemDataTable.ItemDataTable'");
-	static ConstructorHelpers::FObjectFinder<UDataTable> DT_Item(*ItemDataPath);
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_Item(TEXT("DataTable'/Game/Blueprints/DataTable/ItemDataTable.ItemDataTable'"));
 	if (DT_Item.Succeeded())
 	{
 		ItemDataTable = DT_Item.Object;
+	}
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_Equipment(TEXT("DataTable'/Game/Blueprints/DataTable/EquipmentDataTable.EquipmentDataTable'"));
+	if (DT_Equipment.Succeeded())
+	{
+		EquipmentDataTable = DT_Equipment.Object;
+	}
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_Weapon(TEXT("DataTable'/Game/Blueprints/DataTable/WeaponDataTable.WeaponDataTable'"));
+	if (DT_Weapon.Succeeded())
+	{
+		WeaponDataTable = DT_Weapon.Object;
 	}
 }
 
 FItemData* UMyGameInstance::GetItemData(int32 Index)
 {
 	return ItemDataTable->FindRow<FItemData>(*FString::FromInt(Index), TEXT(""));
+}
+
+FEquipmentData* UMyGameInstance::GetEquipmentData(int32 Index)
+{
+	return ItemDataTable->FindRow<FEquipmentData>(*FString::FromInt(Index), TEXT(""));
+}
+
+FWeaponData* UMyGameInstance::GetWeaponData(int32 Index)
+{
+	return ItemDataTable->FindRow<FWeaponData>(*FString::FromInt(Index), TEXT(""));
 }
 
 void UMyGameInstance::SetUserName(FString NewUserName)

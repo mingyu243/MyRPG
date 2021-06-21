@@ -28,4 +28,7 @@ private:
 
 	UFUNCTION(Client, Unreliable)
 	void StoC_SendMessage(const FString& Message);
+
+private:
+	void ToggleInventory();
 };

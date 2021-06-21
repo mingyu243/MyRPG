@@ -5,13 +5,13 @@
 #include "Weapon.generated.h"
 
 UCLASS()
-class MYRPG_API AWeapon : public AEquipment
+class MYRPG_API UWeapon : public UEquipment
 {
 	GENERATED_BODY()
 	
 public:
 	virtual void Init(int32 index) override;
-	virtual void Use() override;
+	virtual void Use(class APlayer_Base* Character) override;
 
 public:
 	struct FWeaponData* GetWeaponData();

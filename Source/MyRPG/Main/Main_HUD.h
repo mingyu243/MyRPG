@@ -16,8 +16,9 @@ public:
 public:
 	TSharedPtr<class SWidget> GetChatInputTextObject();
 	void AddChatMessage(const FString& Message);
-
+	void ToggleInventory();
 	void BindCharacterStat(class UCharacterStatComponent* CharacterStat);
+	void BindInventory(class UInventoryComponent* Inventory);
 
 private:
 	TSubclassOf<class UUW_Main> MainUIClass;

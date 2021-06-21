@@ -13,6 +13,12 @@ public:
 	// UserWidget은 기본 클래스 생성자를 못 쓰나봄. 오류 남.
 	virtual void NativeConstruct() override;
 
+public:
+	void BindInventory(class UInventoryComponent* Inventory);
+
+	void InitializeInventory();
+	void RefreshInventory();
+
 private:
 	UPROPERTY(Meta = (BindWidget))
 	class UUniformGridPanel* UniformGridPanel;
@@ -22,6 +28,8 @@ private:
 
 	TSubclassOf<class UUW_InventorySlot> SlotClass;
 	TArray<class UUW_InventorySlot*> SlotList;
+
+	class UInventoryComponent* CurrentInventory;
 
 private:
 	void CreateSlot();

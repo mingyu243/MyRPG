@@ -16,7 +16,7 @@ public:
 public:
 	TSharedPtr<class SWidget> GetChatInputTextObject();
 	void AddChatMessage(const FString& Message);
-	void ToggleInventory();
+	void ToggleInventory(bool isShow);
 	void BindCharacterStat(class UCharacterStatComponent* CharacterStat);
 	void BindInventory(class UInventoryComponent* Inventory);
 
@@ -24,7 +24,10 @@ private:
 	TSubclassOf<class UUW_Main> MainUIClass;
 	class UUW_Main* MainUIObject;
 
+	TSubclassOf<class UUW_Inventory> InventoryUIClass;
+	class UUW_Inventory* InventoryUIObject;
+
 private:
-	bool CheckUIObject();
-	bool CreateUIObject();
+	template <typename T_UMGClass>
+	bool CreateUIObject(TSubclassOf<T_UMGClass> UIClass, T_UMGClass** UIObject);
 };

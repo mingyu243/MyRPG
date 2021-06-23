@@ -20,7 +20,8 @@ void UUW_Inventory::NativeConstruct()
 		CreateSlot();
 	}
 
-	// Cast<APlayer_Base>(GetOwningPlayerPawn())->GetInventoryComponent()->OnInventoryUpdated;
+	// 임의로 얻기보다는 바인딩하는 게 좋을 것 같다!
+	// Cast<APlayer_Base>(GetOwningPlayerPawn())->GetInventoryComponent()->OnInventoryUpdated.AddDynamic(this, &UUW_Inventory::RefreshInventory);
 }
 
 void UUW_Inventory::BindInventory(UInventoryComponent* Inventory)
@@ -28,8 +29,7 @@ void UUW_Inventory::BindInventory(UInventoryComponent* Inventory)
 	if (Inventory == nullptr) return;
 	CurrentInventory = Inventory;
 
-	//CurrentInventory->OnInventoryUpdated.AddUObject(this, )
-
+	CurrentInventory->OnInventoryUpdated.AddDynamic(this, &UUW_Inventory::RefreshInventory);
 }
 
 //void UUW_PlayerStat::BindCharacterStat(UCharacterStatComponent* CharacterStat)

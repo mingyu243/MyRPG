@@ -76,5 +76,5 @@ void AMain_PC::ToggleInventory()
 	AMain_HUD* HUD = GetHUD<AMain_HUD>();
 	if (HUD == nullptr) return;
 
-	HUD->ToggleInventory();
+	HUD->ToggleInventory(true);
 }

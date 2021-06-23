@@ -10,6 +10,9 @@ class MYRPG_API UUW_InventorySlot : public UUserWidget
 	GENERATED_BODY()
 	
 public:
+	virtual void NativeConstruct() override;
+	
+public:
 	void SetItem(class UItem* Item);
 	
 private:
@@ -24,6 +27,9 @@ private:
 	class UItem* CurrentItem;
 
 private:
+	UFUNCTION()
+	void UseItem();
+
 	void SetItemIconImage(class UTexture2D* Texture);
 	void SetItemCountText(const FText& Text);
 };

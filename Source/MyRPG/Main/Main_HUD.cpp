@@ -1,6 +1,7 @@
 #include "Main_HUD.h"
 
 #include "../UI/UW_Main.h"
+#include "../UI/UW_Inventory.h"
 
 AMain_HUD::AMain_HUD()
 {
@@ -9,37 +10,54 @@ AMain_HUD::AMain_HUD()
 	{
 		MainUIClass = WB_Main.Class;
 	}
+
+	static ConstructorHelpers::FClassFinder<UUW_Inventory> WB_Inventory(TEXT("WidgetBlueprint'/Game/Blueprints/UI/WB/WB_Inventory.WB_Inventory_C'"));
+	if (WB_Inventory.Succeeded())
+	{
+		InventoryUIClass = WB_Inventory.Class;
+	}
 }
 
 void AMain_HUD::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	if (CreateUIObject(MainUIClass, &MainUIObject))
+	{
+		UE_LOG(LogClass, Warning, TEXT("createUI"));
+	}
+	else
+	{
+		UE_LOG(LogClass, Warning, TEXT("Error"));
+	}
 
-	CheckUIObject();
+	CreateUIObject(InventoryUIClass, &InventoryUIObject);
 }
 
 void AMain_HUD::AddChatMessage(const FString& Message)
 {
-	if (!CheckUIObject()) return;
+	if (CreateUIObject(MainUIClass, &MainUIObject) == false) return;
 
 	MainUIObject->AddChatMessage(Message);
 }
 
-void AMain_HUD::ToggleInventory()
+void AMain_HUD::ToggleInventory(bool isShow)
 {
-	MainUIObject->ShowInventory(!(MainUIObject->isShowInventory()));
+	if (CreateUIObject(InventoryUIClass, &InventoryUIObject) == false) return;
+
+	//InventoryUIObject->ShowInventory(!(InventoryUIObject->isShowInventory()));
 }
 
 void AMain_HUD::BindCharacterStat(UCharacterStatComponent* CharacterStat)
 {
-	if (!CheckUIObject()) return;
+	if (CreateUIObject(MainUIClass, &MainUIObject) == false) return;
 
 	MainUIObject->BindCharacterStat(CharacterStat);
 }
 
 void AMain_HUD::BindInventory(class UInventoryComponent* Inventory)
 {
-	if (!CheckUIObject()) return;
+	if (CreateUIObject(InventoryUIClass, &InventoryUIObject) == false) return;
 
 
 }
@@ -49,23 +67,15 @@ TSharedPtr<SWidget> AMain_HUD::GetChatInputTextObject()
 	return MainUIObject->GetChatInputTextObject();
 }
 
-bool AMain_HUD::CheckUIObject()
+template <typename T_UMGClass>
+bool AMain_HUD::CreateUIObject(TSubclassOf<T_UMGClass> UIClass, T_UMGClass** UIObject)
 {
-	if (MainUIObject == nullptr)
+	if ((*UIObject) == nullptr && UIClass)
 	{
-		return CreateUIObject();
-	}
-	return true;
-}
-
-bool AMain_HUD::CreateUIObject()
-{
-	if (MainUIClass)
-	{
-		MainUIObject = CreateWidget<UUW_Main>(GetOwningPlayerController(), MainUIClass);
-		if (MainUIObject)
+		(*UIObject) = CreateWidget<T_UMGClass>(GetOwningPlayerController(), UIClass);
+		if ((*UIObject))
 		{
-			MainUIObject->AddToViewport();
+			(*UIObject)->AddToViewport();
 			return true;
 		}
 	}

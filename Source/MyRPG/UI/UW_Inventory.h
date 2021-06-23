@@ -17,6 +17,7 @@ public:
 	void BindInventory(class UInventoryComponent* Inventory);
 
 	void InitializeInventory();
+	UFUNCTION()
 	void RefreshInventory();
 
 private:

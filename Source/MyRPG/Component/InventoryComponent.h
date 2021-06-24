@@ -23,6 +23,11 @@ public:
 	bool AddItem(class UItem* Item);
 	bool RemoveItem(class UItem* Item);
 
+	TArray<class UItem*>& GetItems()
+	{
+		return Items;
+	}
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	TArray<class UItem*> DefaultItems; // 시작할 때 얻을 수 있는 기본 아이템들.

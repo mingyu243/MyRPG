@@ -15,20 +15,19 @@ public:
 	
 public:
 	void BindCharacterStat(class UCharacterStatComponent* CharacterStat);
-	//void BindInventory(class UInventoryComponent* Inventory);
+	void BindInventory(class UInventoryComponent* Inventory);
 
 public:
-	TSharedPtr<class SWidget> GetChatInputTextObject();
+	TSharedPtr<SWidget> GetChatInputTextObject();
 	void AddChatMessage(const FString& Message);
 
-	//bool isShowInventory();
-	//void ShowInventory(bool bIsShow);
+	void ShowInventory(bool bIsShow);
 
 private:
 	UPROPERTY(Meta = (BindWidget))
 	class UUW_Chat* WB_Chat;
 	UPROPERTY(Meta = (BindWidget))
 	class UUW_PlayerStat* WB_PlayerStat;
-	//UPROPERTY(Meta = (BindWidget))
-	//class UUW_Inventory* WB_Inventory;
+	UPROPERTY(Meta = (BindWidget))
+	class UUW_Inventory* WB_Inventory;
 };

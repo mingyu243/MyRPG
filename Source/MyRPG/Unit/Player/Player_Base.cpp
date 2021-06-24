@@ -66,6 +66,12 @@ void APlayer_Base::BeginPlay()
 			HUD->BindCharacterStat(GetCharacterStat());
 		}
 	}
+
+	// 테스트용 아이템 삽입. 오류났음... 집가서 알아보도록 하자..
+	UWeapon* TestItem = NewObject<UWeapon>();
+	TestItem->Init(200);
+
+	Inventory->AddItem(TestItem);
 }
 
 void APlayer_Base::Tick(float DeltaTime)

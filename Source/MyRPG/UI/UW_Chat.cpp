@@ -40,7 +40,7 @@ TSharedPtr<SWidget> UUW_Chat::GetChatInputTextObject()
 
 void UUW_Chat::OnChatTextCommitted(const FText& Text, ETextCommit::Type CommitMethod)
 {
-	AMain_PC* MyPC = Cast<AMain_PC>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	AMain_PC* MyPC = Cast<AMain_PC>(GetOwningPlayer());
 	if (MyPC == nullptr) return;
 
 	switch (CommitMethod)

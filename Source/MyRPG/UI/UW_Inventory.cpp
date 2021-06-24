@@ -3,6 +3,7 @@
 #include "UW_InventorySlot.h"
 #include "../Unit/Player/Player_Base.h"
 #include "../Component/InventoryComponent.h"
+#include "../Item/Item.h"
 
 #include "Components/UniformGridPanel.h"
 #include "Components/UniformGridSlot.h"
@@ -30,25 +31,23 @@ void UUW_Inventory::BindInventory(UInventoryComponent* Inventory)
 	CurrentInventory = Inventory;
 
 	CurrentInventory->OnInventoryUpdated.AddDynamic(this, &UUW_Inventory::RefreshInventory);
+	InitializeInventory(CurrentInventory);
 }
 
-//void UUW_PlayerStat::BindCharacterStat(UCharacterStatComponent* CharacterStat)
-//{
-//	if (CharacterStat == nullptr) return;
-//	CurrentCharacterStat = CharacterStat;
-//	UpdateCharacterStat();
-//
-//	CharacterStat->OnHPChanged.AddUObject(this, &UUW_PlayerStat::UpdateCharacterStat);
-//}
-
-void UUW_Inventory::InitializeInventory()
+void UUW_Inventory::InitializeInventory(UInventoryComponent* Inventory)
 {
+	TArray<UItem*> Items = CurrentInventory->GetItems();
 
+	for (int i=0; i<Items.Num(); i++)
+	{
+		SlotList[i]->SetItem(Items[i]);
+		// 아이템만큼 UI 채워놓기.
+	}
 }
 
 void UUW_Inventory::RefreshInventory()
 {
-
+	InitializeInventory(CurrentInventory);
 }
 
 void UUW_Inventory::CreateSlot()

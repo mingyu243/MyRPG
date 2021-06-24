@@ -1,6 +1,7 @@
 #include "InventoryComponent.h"
 
 #include "../Item/Item.h"
+#include "../Item/Weapon.h"
 
 UInventoryComponent::UInventoryComponent()
 {
@@ -10,7 +11,7 @@ UInventoryComponent::UInventoryComponent()
 void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	for (UItem* Item : DefaultItems)
 	{
 		AddItem(Item);

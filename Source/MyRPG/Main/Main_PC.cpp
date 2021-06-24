@@ -5,6 +5,11 @@
 
 #include "Kismet/GameplayStatics.h"
 
+AMain_PC::AMain_PC()
+{
+	bIsShowingInventory = false;
+}
+
 void AMain_PC::BeginPlay()
 {
 	Super::BeginPlay();
@@ -47,6 +52,19 @@ void AMain_PC::FocusChatInputText()
 void AMain_PC::FocusGame()
 {
 	SetInputMode(FInputModeGameOnly());
+	SetShowMouseCursor(false);
+}
+
+void AMain_PC::FocusGameAndUI()
+{
+	SetInputMode(FInputModeGameAndUI());
+	SetShowMouseCursor(true);
+}
+
+void AMain_PC::FocusUI()
+{
+	SetInputMode(FInputModeUIOnly());
+	SetShowMouseCursor(true);
 }
 
 void AMain_PC::CtoS_SendMessage_Implementation(const FString& Message)
@@ -76,5 +94,8 @@ void AMain_PC::ToggleInventory()
 	AMain_HUD* HUD = GetHUD<AMain_HUD>();
 	if (HUD == nullptr) return;
 
-	HUD->ToggleInventory(true);
+	bIsShowingInventory = !bIsShowingInventory;
+	bIsShowingInventory ? FocusGameAndUI() : FocusGame();
+
+	HUD->ToggleInventory(bIsShowingInventory);
 }

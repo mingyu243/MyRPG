@@ -42,7 +42,10 @@ void UEquipmentComponent::BeginPlay()
 void UEquipmentComponent::Init(USkeletalMeshComponent* NewBodyMesh)
 {
 	BodyMesh = NewBodyMesh;
-
+	
+	Face->SetMasterPoseComponent(BodyMesh);
+	Hair->SetMasterPoseComponent(BodyMesh);
+	Glove->SetMasterPoseComponent(BodyMesh);
 
 }
 

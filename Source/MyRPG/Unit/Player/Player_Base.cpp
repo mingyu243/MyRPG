@@ -105,16 +105,6 @@ void APlayer_Base::PostInitializeComponents()
 	Equipment->Init(GetMesh());
 }
 
-UEquipmentComponent* APlayer_Base::GetEquipmentComponent()
-{
-	return Equipment;
-}
-
-class UInventoryComponent* APlayer_Base::GetInventoryComponent()
-{
-	return Inventory;
-}
-
 void APlayer_Base::Attack()
 {
 	CtoS_Attack();
@@ -149,12 +139,17 @@ void APlayer_Base::MC_Attack_Implementation()
 	}
 }
 
-void APlayer_Base::UseItem(UItem* Item)
+bool APlayer_Base::UseItem(UItem* Item)
 {
 	if (Item)
 	{
 		Item->Use(this);
+		if (Inventory->RemoveItem(Item))
+		{
+			return true;
+		}
 	}
+	return false;
 }
 
 void APlayer_Base::LookUp(float AxisValue)

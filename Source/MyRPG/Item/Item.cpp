@@ -14,9 +14,9 @@ void UItem::Init(int32 index, UWorld* CurrentWorld)
 	}
 }
 
-void UItem::Use(class APlayer_Base* Character)
+void UItem::Use(APlayer_Base* Character)
 {
-
+	UE_LOG(LogClass, Warning, TEXT("Use"));
 }
 
 FItemData* UItem::GetItemData()

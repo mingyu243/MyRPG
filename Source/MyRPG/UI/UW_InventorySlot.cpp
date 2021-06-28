@@ -23,6 +23,10 @@ void UUW_InventorySlot::SetItem(UItem* Item)
 	{
 		SetItemIconImage(LoadObject<UTexture2D>(NULL, *(CurrentItem->GetItemData()->Path_Icon)));
 	}
+	else
+	{
+		SetItemIconImage(nullptr);
+	}
 }
 
 void UUW_InventorySlot::UseItem()
@@ -30,7 +34,10 @@ void UUW_InventorySlot::UseItem()
 	APlayer_Base* Player = Cast<APlayer_Base>(GetOwningPlayerPawn());
 	if (Player)
 	{
-		Player->UseItem(CurrentItem);
+		if (Player->UseItem(CurrentItem) == true)
+		{
+			SetItem(nullptr); // 사용했으니까, 이 슬롯은 비워줌.
+		}
 	}
 }
 

@@ -30,9 +30,8 @@ public:
 };
 
 UENUM(BlueprintType)
-enum class EEquipmentType : uint8
+enum class EArmorType : uint8
 {
-	// Armor
 	FACE,
 	HAIR,
 	GLOVE,
@@ -41,8 +40,26 @@ enum class EEquipmentType : uint8
 	SHOULDERPAD,
 	BELT,
 	BACKPACK,
+};
 
-	// Weapon
+USTRUCT(BlueprintType)
+struct FArmorData : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+	FArmorData() : Enum_ArmorType(EArmorType::FACE) {}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Index;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	EArmorType Enum_ArmorType;
+};
+
+UENUM(BlueprintType)
+enum class EEquipmentType : uint8
+{
+	ARMOR,
 	WEAPON
 };
 

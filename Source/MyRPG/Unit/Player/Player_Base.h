@@ -29,8 +29,8 @@ public:
 	virtual void PostInitializeComponents() override;
 
 public:
-	class UEquipmentComponent* GetEquipmentComponent();
-	class UInventoryComponent* GetInventoryComponent();
+	class UEquipmentComponent* GetEquipmentComponent() { return Equipment; };
+	class UInventoryComponent* GetInventoryComponent() { return Inventory; };
 
 	void Attack();
 	UFUNCTION(Server, UnReliable)
@@ -39,7 +39,7 @@ public:
 	void MC_Attack();
 
 	UFUNCTION()
-	void UseItem(class UItem* Item);
+	bool UseItem(class UItem* Item);
 
 private:
 	UPROPERTY(VisibleAnywhere)

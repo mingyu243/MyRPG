@@ -31,7 +31,7 @@ void UUW_Main::BindCharacterStat(UCharacterStatComponent* CharacterStat)
 	WB_PlayerStat->BindCharacterStat(CharacterStat);
 }
 
-void UUW_Main::BindInventory(class UInventoryComponent* Inventory)
+void UUW_Main::BindInventory(UInventoryComponent* Inventory)
 {
 	WB_Inventory->BindInventory(Inventory);
 }

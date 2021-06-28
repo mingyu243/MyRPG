@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "../CustomDataTables.h"
 #include "Item.generated.h"
 
 UCLASS()
@@ -13,7 +14,7 @@ public:
 	virtual class UWorld* GetWorld() const { return World; };
 
 public:
-	virtual void Init(int32 index);
+	virtual void Init(int32 index ,UWorld* CurrentWorld);
 	virtual void Use(class APlayer_Base* Character);
 
 public:

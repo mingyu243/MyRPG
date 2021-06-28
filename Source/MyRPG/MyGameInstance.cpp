@@ -30,12 +30,12 @@ FItemData* UMyGameInstance::GetItemData(int32 Index)
 
 FEquipmentData* UMyGameInstance::GetEquipmentData(int32 Index)
 {
-	return ItemDataTable->FindRow<FEquipmentData>(*FString::FromInt(Index), TEXT(""));
+	return EquipmentDataTable->FindRow<FEquipmentData>(*FString::FromInt(Index), TEXT(""));
 }
 
 FWeaponData* UMyGameInstance::GetWeaponData(int32 Index)
 {
-	return ItemDataTable->FindRow<FWeaponData>(*FString::FromInt(Index), TEXT(""));
+	return WeaponDataTable->FindRow<FWeaponData>(*FString::FromInt(Index), TEXT(""));
 }
 
 void UMyGameInstance::SetUserName(FString NewUserName)

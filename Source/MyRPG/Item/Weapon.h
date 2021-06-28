@@ -10,7 +10,7 @@ class MYRPG_API UWeapon : public UEquipment
 	GENERATED_BODY()
 	
 public:
-	virtual void Init(int32 index) override;
+	virtual void Init(int32 index, UWorld* CurrentWorld) override;
 	virtual void Use(class APlayer_Base* Character) override;
 
 public:

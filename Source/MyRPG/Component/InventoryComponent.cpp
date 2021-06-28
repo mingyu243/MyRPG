@@ -18,7 +18,7 @@ void UInventoryComponent::BeginPlay()
 	}
 }
 
-bool UInventoryComponent::AddItem(class UItem* Item)
+bool UInventoryComponent::AddItem(UItem* Item)
 {
 	if (Items.Num() >= Capacity || !Item)
 	{
@@ -34,7 +34,7 @@ bool UInventoryComponent::AddItem(class UItem* Item)
 	return true;
 }
 
-bool UInventoryComponent::RemoveItem(class UItem* Item)
+bool UInventoryComponent::RemoveItem(UItem* Item)
 {
 	if (Item)
 	{

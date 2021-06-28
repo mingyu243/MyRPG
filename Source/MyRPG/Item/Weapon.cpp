@@ -5,11 +5,11 @@
 
 #include "Kismet/GameplayStatics.h"
 
-void UWeapon::Init(int32 index)
+void UWeapon::Init(int32 index, UWorld* CurrentWorld)
 {
-	Super::Init(index);
+	Super::Init(index, CurrentWorld);
 
-	UMyGameInstance* GI = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	UMyGameInstance* GI = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(CurrentWorld));
 	if (GI)
 	{
 		CurrentWeaponData = GI->GetWeaponData(index);

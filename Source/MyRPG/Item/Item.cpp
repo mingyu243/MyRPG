@@ -5,20 +5,21 @@
 
 #include "Kismet/GameplayStatics.h"
 
-void UItem::Init(int32 index)
+void UItem::Init(int32 index, UWorld* CurrentWorld)
 {
-	UMyGameInstance* GI = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	UMyGameInstance* GI = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(CurrentWorld));
 	if (GI)
 	{
 		CurrentItemData = GI->GetItemData(index);
 	}
 }
 
+void UItem::Use(class APlayer_Base* Character)
+{
+
+}
+
 FItemData* UItem::GetItemData()
 {
 	return CurrentItemData;
-}
-
-void UItem::Use(APlayer_Base* Character)
-{
 }

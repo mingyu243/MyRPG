@@ -63,13 +63,15 @@ void APlayer_Base::BeginPlay()
 		AMain_HUD* HUD = Cast<AMain_HUD>(PC->GetHUD());
 		if (HUD)
 		{
+			// UI와 데이터 바인딩.
 			HUD->BindCharacterStat(GetCharacterStat());
+			HUD->BindInventory(GetInventoryComponent());
 		}
 	}
 
-	// 테스트용 아이템 삽입. 오류났음... 집가서 알아보도록 하자..
+	// 테스트용 아이템 삽입.
 	UWeapon* TestItem = NewObject<UWeapon>();
-	TestItem->Init(200);
+	TestItem->Init(200, GetWorld());
 
 	Inventory->AddItem(TestItem);
 }

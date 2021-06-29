@@ -15,9 +15,10 @@ public:
 
 public:
 	void Init(class USkeletalMeshComponent* NewBodyMesh);
+	void SetEquipment(class UEquipment* Equipment);
 
-	class AWeapon* GetWeapon();
-	void SetWeapon(class AWeapon* NewWeapon);
+	//class AWeapon* GetWeapon();
+	//void SetWeapon(class AWeapon* NewWeapon);
 
 private:
 	UPROPERTY(VisibleAnywhere)

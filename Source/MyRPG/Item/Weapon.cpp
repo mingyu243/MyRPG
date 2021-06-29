@@ -19,6 +19,8 @@ void UWeapon::Init(int32 index, UWorld* CurrentWorld)
 void UWeapon::Use(APlayer_Base* Character)
 {
 	Super::Use(Character);
+
+	UE_LOG(LogClass, Warning, TEXT("Weapon Use"));
 }
 
 FWeaponData* UWeapon::GetWeaponData()

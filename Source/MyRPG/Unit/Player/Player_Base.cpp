@@ -70,8 +70,8 @@ void APlayer_Base::BeginPlay()
 	}
 
 	// 테스트용 아이템 삽입.
-	UWeapon* TestItem = NewObject<UWeapon>();
-	TestItem->Init(200, GetWorld());
+	UEquipment* TestItem = NewObject<UEquipment>();
+	TestItem->Init(100, GetWorld());
 
 	Inventory->AddItem(TestItem);
 }

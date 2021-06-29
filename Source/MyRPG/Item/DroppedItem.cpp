@@ -27,7 +27,7 @@ void ADroppedItem::SetItem(UItem* Item)
 	UMyGameInstance* GI = Cast<UMyGameInstance>(GetGameInstance());
 	if (GI)
 	{
-		UStaticMesh* LoadedMesh = LoadObject<UStaticMesh>(NULL, *(GI->GetItemData(Item->GetItemData()->Index)->Path_Mesh));
+		UStaticMesh* LoadedMesh = LoadObject<UStaticMesh>(NULL, *(Item->GetItemData()->Path_Mesh));
 		if (LoadedMesh)
 		{
 			SetPreviewMesh(LoadedMesh);

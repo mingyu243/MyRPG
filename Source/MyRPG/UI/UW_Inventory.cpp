@@ -20,6 +20,8 @@ void UUW_Inventory::NativeConstruct()
 	{
 		CreateSlot();
 	}
+	UniformGridPanel->SetMinDesiredSlotWidth(128.0f);
+	UniformGridPanel->SetMinDesiredSlotHeight(128.0f);
 
 	// 임의로 얻기보다는 바인딩하는 게 좋을 것 같다!
 	// Cast<APlayer_Base>(GetOwningPlayerPawn())->GetInventoryComponent()->OnInventoryUpdated.AddDynamic(this, &UUW_Inventory::RefreshInventory);

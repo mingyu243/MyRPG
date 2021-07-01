@@ -50,6 +50,8 @@ private:
 	class UEquipmentComponent* Equipment;
 	UPROPERTY(VisibleAnywhere)
 	class UInventoryComponent* Inventory;
+	UPROPERTY(VisibleAnywhere)
+	class USceneCaptureComponent2D* SceneCapture;
 
 private:
 	UPROPERTY(VisibleAnywhere)

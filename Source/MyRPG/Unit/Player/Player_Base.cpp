@@ -9,6 +9,8 @@
 #include "../../CustomDataTables.h"
 
 #include "GameFramework/SpringArmComponent.h"
+#include "Components/SceneCaptureComponent2D.h"
+#include "Engine/TextureRenderTarget2D.h"
 #include "Camera/CameraComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
@@ -23,9 +25,11 @@ APlayer_Base::APlayer_Base()
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CAMERA"));
 	Equipment = CreateDefaultSubobject<UEquipmentComponent>(TEXT("EQUIPMENT")); // 대문자 단축키는 Ctrl + Shift + U.
 	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("INVENTORY"));
+	SceneCapture = CreateDefaultSubobject<USceneCaptureComponent2D>(TEXT("SCENECAPTURE"));
 
 	SpringArm->SetupAttachment(RootComponent);
 	Camera->SetupAttachment(SpringArm);
+	SceneCapture->SetupAttachment(RootComponent);
 
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SK_Knight(TEXT("SkeletalMesh'/Game/ModularRPGHeroesPolyart/Meshes/OneMeshCharacters/KnightSK.KnightSK'"));
 	if (SK_Knight.Succeeded())
@@ -38,6 +42,17 @@ APlayer_Base::APlayer_Base()
 		GetMesh()->SetAnimInstanceClass(ABP_Player.Class);
 	}
 	GetMesh()->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, -90.f), FRotator(0.0f, 270.0f, 0.0f));
+
+	static ConstructorHelpers::FObjectFinder<UTextureRenderTarget2D> RT_Player(TEXT("TextureRenderTarget2D'/Game/Blueprints/UI/RT_Player.RT_Player'"));
+	if (RT_Player.Succeeded())
+	{
+		SceneCapture->TextureTarget = RT_Player.Object;
+	}
+	SceneCapture->SetRelativeLocationAndRotation(FVector(170.0f, 0.0f, 0.0f), FRotator(0.0f, 180.0f, 0.0f));
+	SceneCapture->ShowFlags.Atmosphere = 0;
+	SceneCapture->CaptureSource = ESceneCaptureSource::SCS_SceneColorSceneDepth;
+	SceneCapture->PrimitiveRenderMode = ESceneCapturePrimitiveRenderMode::PRM_UseShowOnlyList;
+	SceneCapture->ShowOnlyActors.Add(this);
 
 	SpringArm->TargetArmLength = 500.0f;
 	SpringArm->SocketOffset = FVector(0.0f, 0.0f, 300.0f);

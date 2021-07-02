@@ -33,15 +33,15 @@ UENUM(BlueprintType)
 enum class EEquipmentType : uint8
 {
 	// Armor
-	FACE,
-	HAIR,
-	GLOVE,
-	BODY,
-	SHOE,
 	HEADGEARS,
+	HAIR,
+	FACE,
 	SHOULDERPAD,
-	BELT,
+	BODY,
 	BACKPACK,
+	BELT,
+	GLOVE,
+	SHOE,
 
 	// Weapon
 	WEAPON

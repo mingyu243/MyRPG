@@ -38,7 +38,7 @@ void UUW_Inventory::BindInventory(UInventoryComponent* Inventory)
 
 void UUW_Inventory::InitializeInventory(UInventoryComponent* Inventory)
 {
-	TArray<UItem*> Items = CurrentInventory->GetItems();
+	TArray<UItem*> Items = Inventory->GetItems();
 
 	for (int i=0; i<Items.Num(); i++)
 	{

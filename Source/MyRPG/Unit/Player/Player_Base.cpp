@@ -84,11 +84,17 @@ void APlayer_Base::BeginPlay()
 		}
 	}
 
-	// 테스트용 아이템 삽입.
-	UEquipment* TestItem = NewObject<UEquipment>();
-	TestItem->Init(100, GetWorld());
+	Equipment->SetEquipment(Equipment->CreateEquipment(100)); // 옷
+	Equipment->SetEquipment(Equipment->CreateEquipment(130)); // 얼굴
+	Equipment->SetEquipment(Equipment->CreateEquipment(140)); // 장갑
+	Equipment->SetEquipment(Equipment->CreateEquipment(150)); // 헤어
+	Equipment->SetEquipment(Equipment->CreateEquipment(180)); // 신발
 
-	Inventory->AddItem(TestItem);
+
+	// 테스트용 아이템 인벤토리에 추가.
+	//UEquipment* testItem = NewObject<UEquipment>();
+	//testItem->Init(130, GetWorld());
+	//Inventory->AddItem(testItem);
 }
 
 void APlayer_Base::Tick(float DeltaTime)

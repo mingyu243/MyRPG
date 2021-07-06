@@ -10,7 +10,9 @@ enum class EWeaponType : uint8
 	SWORD,
 	SHIELD,
 	BOW,
-	MAGIC_WAND
+	MAGIC_WAND,
+	AXE,
+	HAMMER
 };
 
 USTRUCT(BlueprintType)

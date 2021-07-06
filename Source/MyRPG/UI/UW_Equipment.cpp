@@ -29,7 +29,7 @@ void UUW_Equipment::BindEquipmentComponent(UEquipmentComponent* EquipmentCompone
 	CurrentEquipmentComponent->OnEquipmentUpdated.AddDynamic(this, &UUW_Equipment::RefreshEquipment);
 }
 
-void UUW_Equipment::InitializeEquipment(UEquipmentComponent* Equipment)
+void UUW_Equipment::InitializeEquipment(UEquipmentComponent* EquipmentComponent)
 {
 	// UI 초기화 해줄랬는데, 
 	// EquipmentComponent에 SkeletalMeshComponent만 있고,

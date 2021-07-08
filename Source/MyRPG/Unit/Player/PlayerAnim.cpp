@@ -27,8 +27,7 @@ UPlayerAnim::UPlayerAnim()
 	{
 		AM_TwoHandSword = AM_Attack_TwoHandSword.Object;
 	}
-	CurrentCombatType = ECombatType::TWO_HAND_SWORD;
-	CheckCombatType();
+	
 }
 
 void UPlayerAnim::NativeBeginPlay()
@@ -85,10 +84,16 @@ FName UPlayerAnim::GetAttackMontageSectionName(int32 Section)
 	return FName(*FString::Printf(TEXT("Attack%d"), Section));
 }
 
-void UPlayerAnim::CheckCombatType()
-{
-	// 나중에 무기 교체할 때마다 체크할 예정.
 
+
+void UPlayerAnim::SetCombatType(ECombatType Type)
+{
+	CurrentCombatType = Type;
+	UpdateCombatType();
+}
+
+void UPlayerAnim::UpdateCombatType()
+{
 	switch (CurrentCombatType)
 	{
 	case ECombatType::SWORD_SHIELD:

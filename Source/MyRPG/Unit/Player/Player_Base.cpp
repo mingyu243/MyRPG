@@ -63,6 +63,8 @@ APlayer_Base::APlayer_Base()
 	IsAttacking = false;
 	MaxCombo = 3;
 	AttackEndComboState();
+	
+	CurrentCombatType = ECombatType::SWORD_SHIELD;
 }
 
 void APlayer_Base::BeginPlay()
@@ -84,6 +86,7 @@ void APlayer_Base::BeginPlay()
 			HUD->BindEquipment(GetEquipmentComponent());
 		}
 	}
+	GetEquipmentComponent()->OnWeaponUpdated.AddDynamic(this, &APlayer_Base::CheckCombatType);
 
 	// 바로 장착하기.
 	// EquipmentComponent->SetEquipment(EquipmentComponent->CreateEquipment(100)); // 옷
@@ -101,8 +104,11 @@ void APlayer_Base::BeginPlay()
 	Inventory->AddItem(EquipmentComponent->CreateEquipment(500)); // 가방
 
 	Inventory->AddItem(EquipmentComponent->CreateWeapon(200)); // 검
-	Inventory->AddItem(EquipmentComponent->CreateWeapon(200)); // 검
-	Inventory->AddItem(EquipmentComponent->CreateWeapon(200)); // 검
+	Inventory->AddItem(EquipmentComponent->CreateWeapon(201)); // 검
+	Inventory->AddItem(EquipmentComponent->CreateWeapon(202)); // 검
+	Inventory->AddItem(EquipmentComponent->CreateWeapon(203)); // 검
+	Inventory->AddItem(EquipmentComponent->CreateWeapon(210)); // 방패
+	Inventory->AddItem(EquipmentComponent->CreateWeapon(211)); // 방패
 }
 
 void APlayer_Base::Tick(float DeltaTime)
@@ -129,6 +135,7 @@ void APlayer_Base::PostInitializeComponents()
 	AnimBP = Cast<UPlayerAnim>(GetMesh()->GetAnimInstance());
 	AnimBP->OnMontageEnded.AddDynamic(this, &APlayer_Base::OnAttackMontageEnded);
 	AnimBP->OnNextAttackCheck.AddUObject(this, &APlayer_Base::NextAttackCheck);
+	AnimBP->SetCombatType(CurrentCombatType);
 
 	// 장비를 장착할 메쉬 설정.
 	EquipmentComponent->Init(GetMesh());
@@ -181,11 +188,11 @@ bool APlayer_Base::UseItem(UItem* Item)
 	return false;
 }
 
-bool APlayer_Base::TakeOffEquipment(UEquipment* Equipment)
+bool APlayer_Base::TakeOffEquipment(UEquipment* Equipment, EAllMeshPartsType PartsType)
 {
 	if (Equipment)
 	{
-		UEquipment* Pop = EquipmentComponent->PopEquipment(Equipment);
+		UEquipment* Pop = EquipmentComponent->PopEquipment(Equipment, PartsType);
 		if (Pop)
 		{
 			Inventory->AddItem(Pop);
@@ -222,6 +229,37 @@ void APlayer_Base::StartJump()
 	if (IsAttacking) return;
 
 	bPressedJump = true; // ACharacter::Jump()를 호출한 것과 비슷함.
+}
+
+void APlayer_Base::CheckCombatType(UEquipment* WeaponL, UEquipment* WeaponR)
+{
+	UWeapon* WeaponLeft = Cast<UWeapon>(WeaponL);
+	UWeapon* WeaponRight = Cast<UWeapon>(WeaponR);
+
+	UE_LOG(LogClass, Warning, TEXT("asd"));
+
+	if (WeaponRight)
+	{
+		if (WeaponLeft)
+		{
+			switch (WeaponLeft->GetWeaponData()->Enum_WeaponType)
+			{
+			case EWeaponType::SWORD: CurrentCombatType = ECombatType::DOUBLE_SWORD; break;
+			case EWeaponType::SHIELD: CurrentCombatType = ECombatType::SWORD_SHIELD; break;
+			default:
+				break;
+			}
+		}
+		else
+		{
+			CurrentCombatType = ECombatType::TWO_HAND_SWORD;
+		}
+	}
+	else
+	{
+		CurrentCombatType = ECombatType::SWORD_SHIELD; // 원래는 NO_WEAPON 타입. 애니메이션 지정 안해서 임시로 씀.
+	}
+	AnimBP->SetCombatType(CurrentCombatType);
 }
 
 void APlayer_Base::OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted)

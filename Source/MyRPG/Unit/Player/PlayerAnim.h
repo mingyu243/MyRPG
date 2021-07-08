@@ -25,6 +25,9 @@ public:
 	void PlayAttackMontage();
 	void JumpToAttackMontageSection(int32 NewSection);
 
+	UFUNCTION()
+	void SetCombatType(ECombatType Type);
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	APlayer_Base* Player;
@@ -56,5 +59,5 @@ private:
 	FName GetAttackMontageSectionName(int32 Section);
 
 	UFUNCTION()
-	void CheckCombatType();
+	void UpdateCombatType();
 };

@@ -32,19 +32,30 @@ void UUW_Equipment::BindEquipmentComponent(UEquipmentComponent* EquipmentCompone
 
 void UUW_Equipment::InitializeEquipment(UEquipmentComponent* EquipmentComponent)
 {
-	WB_EquipmentSlot_HeadGears->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_HEADGEARS));
-	WB_EquipmentSlot_Hair->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_HAIR));
-	WB_EquipmentSlot_Face->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_FACE));
-	WB_EquipmentSlot_ShoulderPad->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_SHOULDERPAD));
-	WB_EquipmentSlot_Body->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_BODYMESH));
-	WB_EquipmentSlot_Belt->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_BELT));
-	WB_EquipmentSlot_Shoe->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_SHOE));
-	WB_EquipmentSlot_Glove->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_GLOVE));
+	WB_EquipmentSlot_HeadGears->SetEquipment(EquipmentComponent->GetEquipmentInfo(EAllMeshPartsType::E_HEADGEARS));
+	WB_EquipmentSlot_HeadGears->PartsType = EAllMeshPartsType::E_HEADGEARS;
+	WB_EquipmentSlot_Hair->SetEquipment(EquipmentComponent->GetEquipmentInfo(EAllMeshPartsType::E_HAIR));
+	WB_EquipmentSlot_Hair->PartsType = EAllMeshPartsType::E_HAIR;
+	WB_EquipmentSlot_Face->SetEquipment(EquipmentComponent->GetEquipmentInfo(EAllMeshPartsType::E_FACE));
+	WB_EquipmentSlot_Face->PartsType = EAllMeshPartsType::E_FACE;
+	WB_EquipmentSlot_ShoulderPad->SetEquipment(EquipmentComponent->GetEquipmentInfo(EAllMeshPartsType::E_SHOULDERPAD));
+	WB_EquipmentSlot_ShoulderPad->PartsType = EAllMeshPartsType::E_SHOULDERPAD;
+	WB_EquipmentSlot_Body->SetEquipment(EquipmentComponent->GetEquipmentInfo(EAllMeshPartsType::E_BODYMESH));
+	WB_EquipmentSlot_Body->PartsType = EAllMeshPartsType::E_BODYMESH;
+	WB_EquipmentSlot_Belt->SetEquipment(EquipmentComponent->GetEquipmentInfo(EAllMeshPartsType::E_BELT));
+	WB_EquipmentSlot_Belt->PartsType = EAllMeshPartsType::E_BELT;
+	WB_EquipmentSlot_Shoe->SetEquipment(EquipmentComponent->GetEquipmentInfo(EAllMeshPartsType::E_SHOE));
+	WB_EquipmentSlot_Shoe->PartsType = EAllMeshPartsType::E_SHOE;
+	WB_EquipmentSlot_Glove->SetEquipment(EquipmentComponent->GetEquipmentInfo(EAllMeshPartsType::E_GLOVE));
+	WB_EquipmentSlot_Glove->PartsType = EAllMeshPartsType::E_GLOVE;
 
-	WB_EquipmentSlot_Backpack->SetEquipment(EquipmentComponent->GetEquipment(EStaticMeshPartsType::E_BACKPACK));
+	WB_EquipmentSlot_Backpack->SetEquipment(EquipmentComponent->GetEquipmentInfo(EAllMeshPartsType::E_BACKPACK));
+	WB_EquipmentSlot_Backpack->PartsType = EAllMeshPartsType::E_BACKPACK;
 
-	WB_EquipmentSlot_WeaponL->SetEquipment(EquipmentComponent->GetEquipment(EStaticMeshPartsType::E_WEAPON_LEFT));
-	WB_EquipmentSlot_WeaponR->SetEquipment(EquipmentComponent->GetEquipment(EStaticMeshPartsType::E_WEAPON_RIGHT));
+	WB_EquipmentSlot_WeaponL->SetEquipment(EquipmentComponent->GetEquipmentInfo(EAllMeshPartsType::E_WEAPON_LEFT));
+	WB_EquipmentSlot_WeaponL->PartsType = EAllMeshPartsType::E_WEAPON_LEFT;
+	WB_EquipmentSlot_WeaponR->SetEquipment(EquipmentComponent->GetEquipmentInfo(EAllMeshPartsType::E_WEAPON_RIGHT));
+	WB_EquipmentSlot_WeaponR->PartsType = EAllMeshPartsType::E_WEAPON_RIGHT;
 
 	// UI 초기화 해줄랬는데, 
 	// EquipmentComponent에 SkeletalMeshComponent만 있고,

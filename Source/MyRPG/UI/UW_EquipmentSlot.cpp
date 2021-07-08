@@ -32,7 +32,7 @@ void UUW_EquipmentSlot::SlotClicked()
 	APlayer_Base* Player = Cast<APlayer_Base>(GetOwningPlayerPawn());
 	if (Player)
 	{
-		if (Player->TakeOffEquipment(CurrentEquipment) == true)
+		if (Player->TakeOffEquipment(CurrentEquipment, PartsType) == true)
 		{
 			SetEquipment(nullptr);
 		}

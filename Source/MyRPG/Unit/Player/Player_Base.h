@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "../Unit.h"
+#include "../../Component/EquipmentComponent.h"
 #include "Player_Base.generated.h"
 
 UENUM(BlueprintType)
@@ -41,7 +42,11 @@ public:
 	UFUNCTION()
 	bool UseItem(class UItem* Item);
 	UFUNCTION()
-	bool TakeOffEquipment(class UEquipment* Equipment);
+	bool TakeOffEquipment(class UEquipment* Equipment, EAllMeshPartsType PartsType);
+
+public:
+	UPROPERTY(VisibleAnywhere)
+	ECombatType CurrentCombatType;
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -81,6 +86,10 @@ private:
 	void MoveRight(float AxisValue);
 	UFUNCTION()
 	void StartJump();
+
+	// 무기에 따른 전투 방식 결정.
+	UFUNCTION()
+	void CheckCombatType(class UEquipment* WeaponL, class UEquipment* WeaponR);
 
 private:
 	UFUNCTION()

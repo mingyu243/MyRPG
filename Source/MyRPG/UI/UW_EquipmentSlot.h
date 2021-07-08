@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "../Component/EquipmentComponent.h"
 #include "UW_EquipmentSlot.generated.h"
 
 UCLASS()
@@ -13,6 +14,8 @@ public:
 	virtual void NativeConstruct() override;
 
 public:
+	EAllMeshPartsType PartsType;
+
 	void SetEquipment(class UEquipment* Equipment);
 	void SetTypeText(const FText& Text);
 

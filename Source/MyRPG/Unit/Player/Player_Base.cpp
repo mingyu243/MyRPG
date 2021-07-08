@@ -95,6 +95,7 @@ void APlayer_Base::BeginPlay()
 	Inventory->AddItem(EquipmentComponent->CreateEquipment(133)); // 얼굴
 	Inventory->AddItem(EquipmentComponent->CreateEquipment(141)); // 장갑
 	Inventory->AddItem(EquipmentComponent->CreateEquipment(150)); // 헤어
+	Inventory->AddItem(EquipmentComponent->CreateEquipment(152)); // 헤어
 	Inventory->AddItem(EquipmentComponent->CreateEquipment(182)); // 신발
 	Inventory->AddItem(EquipmentComponent->CreateEquipment(193)); // 어깨 장식
 	Inventory->AddItem(EquipmentComponent->CreateEquipment(500)); // 가방

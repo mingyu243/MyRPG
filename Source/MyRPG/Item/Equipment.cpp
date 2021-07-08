@@ -3,6 +3,7 @@
 #include "../MyGameInstance.h"
 #include "../Unit/Player/Player_Base.h"
 #include "../Component/EquipmentComponent.h"
+#include "../Component/InventoryComponent.h"
 
 #include "Kismet/GameplayStatics.h"
 
@@ -21,8 +22,11 @@ void UEquipment::Use(APlayer_Base* Character)
 {
 	Super::Use(Character);
 
-	Character->GetEquipmentComponent()->SetEquipment(this);
-	UE_LOG(LogClass, Warning, TEXT("Equipment Use"));
+	UEquipment* ReturnEquipment = Character->GetEquipmentComponent()->SetEquipment(this);
+	if (ReturnEquipment)
+	{
+		Character->GetInventoryComponent()->AddItem(ReturnEquipment);
+	}
 }
 
 FEquipmentData* UEquipment::GetEquipmentData()

@@ -5,6 +5,7 @@
 #include "../CustomDataTables.h"
 #include "EquipmentComponent.generated.h"
 
+
 UENUM(BlueprintType)
 enum class ESkeletalMeshPartsType : uint8
 {
@@ -43,7 +44,7 @@ public:
 
 public:
 	void Init(class USkeletalMeshComponent* NewBodyMesh);
-	void SetEquipment(class UEquipment* Equipment);
+	class UEquipment* SetEquipment(class UEquipment* Equipment); // 아무것도 장착하지 않았다면 장착. 이미 장착하고 있다면 새로운 것을 장착하고, 장착하고 있던 것을 return 함.
 	class UEquipment* CreateEquipment(int index);
 	class USkeletalMeshComponent* GetMeshComponent(ESkeletalMeshPartsType SK_Type);
 	class UStaticMeshComponent* GetMeshComponent(EStaticMeshPartsType SM_Type);

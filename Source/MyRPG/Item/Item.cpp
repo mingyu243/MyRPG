@@ -7,10 +7,11 @@
 
 void UItem::Init(int32 index, UWorld* CurrentWorld)
 {
+	CurrnetIndex = index;
 	UMyGameInstance* GI = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(CurrentWorld));
 	if (GI)
 	{
-		CurrentItemData = GI->GetItemData(index);
+		CurrentItemData = GI->GetItemData(CurrnetIndex);
 	}
 }
 

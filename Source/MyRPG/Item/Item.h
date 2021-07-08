@@ -23,6 +23,8 @@ public:
 	UPROPERTY()
 	class UInventoryComponent* OwningInventory;
 
+	int32 CurrnetIndex;
+
 public:
 	struct FItemData* GetItemData();
 

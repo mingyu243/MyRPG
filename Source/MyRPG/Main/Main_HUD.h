@@ -19,6 +19,7 @@ public:
 	void ToggleInventory(bool isShow);
 	void BindCharacterStat(class UCharacterStatComponent* CharacterStat);
 	void BindInventory(class UInventoryComponent* Inventory);
+	void BindEquipment(class UEquipmentComponent* Equipment);
 
 private:
 	TSubclassOf<class UUW_Main> MainUIClass;

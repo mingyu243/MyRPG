@@ -11,13 +11,13 @@ void UUW_EquipmentSlot::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	Button_Slot->OnClicked.AddDynamic(this, &UUW_EquipmentSlot::TakeOffEquipment);
+	Button_Slot->OnClicked.AddDynamic(this, &UUW_EquipmentSlot::SlotClicked);
 }
 
 void UUW_EquipmentSlot::SetEquipment(UEquipment* Equipment)
 {
 	CurrentEquipment = Equipment;
-	if (CurrentEquipment)
+	if (CurrentEquipment != nullptr && CurrentEquipment->GetItemData() != nullptr)
 	{
 		SetItemIconImage(LoadObject<UTexture2D>(NULL, *(CurrentEquipment->GetItemData()->Path_Icon)));
 	}
@@ -27,9 +27,16 @@ void UUW_EquipmentSlot::SetEquipment(UEquipment* Equipment)
 	}
 }
 
-void UUW_EquipmentSlot::TakeOffEquipment()
+void UUW_EquipmentSlot::SlotClicked()
 {
-
+	APlayer_Base* Player = Cast<APlayer_Base>(GetOwningPlayerPawn());
+	if (Player)
+	{
+		if (Player->TakeOffEquipment(CurrentEquipment) == true)
+		{
+			SetEquipment(nullptr);
+		}
+	}
 }
 
 void UUW_EquipmentSlot::SetItemIconImage(UTexture2D* Texture)

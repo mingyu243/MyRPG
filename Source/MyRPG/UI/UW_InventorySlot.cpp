@@ -19,7 +19,7 @@ void UUW_InventorySlot::NativeConstruct()
 void UUW_InventorySlot::SetItem(UItem* Item)
 {
 	CurrentItem = Item;
-	if (CurrentItem)
+	if (CurrentItem != nullptr && CurrentItem->GetItemData() != nullptr)
 	{
 		SetItemIconImage(LoadObject<UTexture2D>(NULL, *(CurrentItem->GetItemData()->Path_Icon)));
 	}
@@ -36,7 +36,7 @@ void UUW_InventorySlot::UseItem()
 	{
 		if (Player->UseItem(CurrentItem) == true)
 		{
-			SetItem(nullptr); // 사용했으니까, 이 슬롯은 비워줌.
+			//CurrentItem = nullptr; // 사용했으니까, 이 슬롯은 비워줌.
 		}
 	}
 }

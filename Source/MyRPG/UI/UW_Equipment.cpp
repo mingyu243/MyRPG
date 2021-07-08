@@ -2,6 +2,7 @@
 
 #include "UW_EquipmentSlot.h"
 #include "../Component/EquipmentComponent.h"
+#include "../Item/Equipment.h"
 
 void UUW_Equipment::NativeConstruct()
 {
@@ -31,6 +32,20 @@ void UUW_Equipment::BindEquipmentComponent(UEquipmentComponent* EquipmentCompone
 
 void UUW_Equipment::InitializeEquipment(UEquipmentComponent* EquipmentComponent)
 {
+	WB_EquipmentSlot_HeadGears->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_HEADGEARS));
+	WB_EquipmentSlot_Hair->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_HAIR));
+	WB_EquipmentSlot_Face->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_FACE));
+	WB_EquipmentSlot_ShoulderPad->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_SHOULDERPAD));
+	WB_EquipmentSlot_Body->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_BODYMESH));
+	WB_EquipmentSlot_Belt->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_BELT));
+	WB_EquipmentSlot_Shoe->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_SHOE));
+	WB_EquipmentSlot_Glove->SetEquipment(EquipmentComponent->GetEquipment(ESkeletalMeshPartsType::E_GLOVE));
+
+	WB_EquipmentSlot_Backpack->SetEquipment(EquipmentComponent->GetEquipment(EStaticMeshPartsType::E_BACKPACK));
+
+	WB_EquipmentSlot_WeaponL->SetEquipment(EquipmentComponent->GetEquipment(EStaticMeshPartsType::E_WEAPON_LEFT));
+	WB_EquipmentSlot_WeaponR->SetEquipment(EquipmentComponent->GetEquipment(EStaticMeshPartsType::E_WEAPON_RIGHT));
+
 	// UI 초기화 해줄랬는데, 
 	// EquipmentComponent에 SkeletalMeshComponent만 있고,
 	// UEquipment 데이터는 안 들고 있었음.. ㄷㄷ;;

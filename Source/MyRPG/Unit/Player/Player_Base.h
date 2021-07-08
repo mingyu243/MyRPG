@@ -29,7 +29,7 @@ public:
 	virtual void PostInitializeComponents() override;
 
 public:
-	class UEquipmentComponent* GetEquipmentComponent() { return Equipment; };
+	class UEquipmentComponent* GetEquipmentComponent() { return EquipmentComponent; };
 	class UInventoryComponent* GetInventoryComponent() { return Inventory; };
 
 	void Attack();
@@ -40,6 +40,8 @@ public:
 
 	UFUNCTION()
 	bool UseItem(class UItem* Item);
+	UFUNCTION()
+	bool TakeOffEquipment(class UEquipment* Equipment);
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -47,7 +49,7 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* Camera;
 	UPROPERTY(VisibleAnywhere)
-	class UEquipmentComponent* Equipment;
+	class UEquipmentComponent* EquipmentComponent;
 	UPROPERTY(VisibleAnywhere)
 	class UInventoryComponent* Inventory;
 	UPROPERTY(VisibleAnywhere)

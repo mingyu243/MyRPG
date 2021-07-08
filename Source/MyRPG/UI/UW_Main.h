@@ -16,12 +16,14 @@ public:
 public:
 	void BindCharacterStat(class UCharacterStatComponent* CharacterStat);
 	void BindInventory(class UInventoryComponent* Inventory);
+	void BindEquipment(class UEquipmentComponent* Equipment);
 
 public:
 	TSharedPtr<SWidget> GetChatInputTextObject();
 	void AddChatMessage(const FString& Message);
 
 	void ShowInventory(bool bIsShow);
+	void ShowEquipment(bool bIsShow);
 
 private:
 	UPROPERTY(Meta = (BindWidget))
@@ -30,4 +32,6 @@ private:
 	class UUW_PlayerStat* WB_PlayerStat;
 	UPROPERTY(Meta = (BindWidget))
 	class UUW_Inventory* WB_Inventory;
+	UPROPERTY(Meta = (BindWidget))
+	class UUW_Equipment* WB_Equipment;
 };

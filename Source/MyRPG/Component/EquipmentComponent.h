@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "../CustomDataTables.h"
 #include "EquipmentComponent.generated.h"
 
 UENUM(BlueprintType)
@@ -29,6 +30,7 @@ enum class EStaticMeshPartsType : uint8
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEquipmentUpdated);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWeaponUpdated);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MYRPG_API UEquipmentComponent : public UActorComponent
@@ -43,13 +45,31 @@ public:
 	void Init(class USkeletalMeshComponent* NewBodyMesh);
 	void SetEquipment(class UEquipment* Equipment);
 	class UEquipment* CreateEquipment(int index);
+	class USkeletalMeshComponent* GetMeshComponent(ESkeletalMeshPartsType SK_Type);
+	class UStaticMeshComponent* GetMeshComponent(EStaticMeshPartsType SM_Type);
+	class UEquipment* GetEquipment(ESkeletalMeshPartsType SK_Type);
+	class UEquipment* GetEquipment(EStaticMeshPartsType SM_Type);
+	class UEquipment* PopEquipment(class UEquipment* Equipment);
+
+	TArray<class UEquipment*>& GetSkeletalEquipments()
+	{
+		return SkeletalEquipmentArray;
+	}
+	TArray<class UEquipment*>& GetStaticEquipments()
+	{
+		return StaticEquipmentArray;
+	}
+
+	class UWeapon* CreateWeapon(int index);
+	class UWeapon* GetWeapon();
+	void SetWeapon(class UWeapon* NewWeapon);
 
 public:
 	UPROPERTY(VisibleAnywhere)
 	FOnEquipmentUpdated OnEquipmentUpdated;
 
-	//class AWeapon* GetWeapon();
-	//void SetWeapon(class AWeapon* NewWeapon);
+	UPROPERTY(VisibleAnywhere)
+	FOnWeaponUpdated OnWeaponUpdated;
 
 public:
 	// 애니메이션으로 움직이는 메쉬들.
@@ -61,30 +81,41 @@ public:
 	TArray<UStaticMeshComponent*> StaticMeshArray;
 
 	UPROPERTY(VisibleAnywhere)
-	class USkeletalMeshComponent* HeadGears;
+	USkeletalMesh* BasicBody;
 	UPROPERTY(VisibleAnywhere)
-	class USkeletalMeshComponent* Hair;
+	USkeletalMesh* BasicFace;
 	UPROPERTY(VisibleAnywhere)
-	class USkeletalMeshComponent* Face;
+	USkeletalMesh* BasicHair;
 	UPROPERTY(VisibleAnywhere)
-	class USkeletalMeshComponent* ShoulderPad;
+	USkeletalMesh* BasicShoe;
 	UPROPERTY(VisibleAnywhere)
-	class USkeletalMeshComponent* BodyMesh;
-	UPROPERTY(VisibleAnywhere)
-	class USkeletalMeshComponent* Belt;
-	UPROPERTY(VisibleAnywhere)
-	class USkeletalMeshComponent* Glove;
-	UPROPERTY(VisibleAnywhere)
-	class USkeletalMeshComponent* Shoe;
+	USkeletalMesh* BasicGlove;
 
-	UPROPERTY(VisibleAnywhere)
-	class UStaticMeshComponent* Backpack;
-	UPROPERTY(VisibleAnywhere)
-	class UStaticMeshComponent* Shield;
-	UPROPERTY(VisibleAnywhere)
-	class UStaticMeshComponent* WeaponR;
-	UPROPERTY(VisibleAnywhere)
-	class UStaticMeshComponent* WeaponL;
+	//UPROPERTY(VisibleAnywhere)
+	//class USkeletalMeshComponent* HeadGears;
+	//UPROPERTY(VisibleAnywhere)
+	//class USkeletalMeshComponent* Hair;
+	//UPROPERTY(VisibleAnywhere)
+	//class USkeletalMeshComponent* Face;
+	//UPROPERTY(VisibleAnywhere)
+	//class USkeletalMeshComponent* ShoulderPad;
+	//UPROPERTY(VisibleAnywhere)
+	//class USkeletalMeshComponent* BodyMesh;
+	//UPROPERTY(VisibleAnywhere)
+	//class USkeletalMeshComponent* Belt;
+	//UPROPERTY(VisibleAnywhere)
+	//class USkeletalMeshComponent* Glove;
+	//UPROPERTY(VisibleAnywhere)
+	//class USkeletalMeshComponent* Shoe;
+
+	//UPROPERTY(VisibleAnywhere)
+	//class UStaticMeshComponent* Backpack;
+	//UPROPERTY(VisibleAnywhere)
+	//class UStaticMeshComponent* Shield;
+	//UPROPERTY(VisibleAnywhere)
+	//class UStaticMeshComponent* WeaponR;
+	//UPROPERTY(VisibleAnywhere)
+	//class UStaticMeshComponent* WeaponL;
 
 	//UPROPERTY(VisibleAnywhere)
 	//class AWeapon* CurrentWeapon;

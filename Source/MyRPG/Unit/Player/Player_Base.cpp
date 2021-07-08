@@ -23,7 +23,7 @@ APlayer_Base::APlayer_Base()
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SPRINGARM"));
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CAMERA"));
-	Equipment = CreateDefaultSubobject<UEquipmentComponent>(TEXT("EQUIPMENT")); // 대문자 단축키는 Ctrl + Shift + U.
+	EquipmentComponent = CreateDefaultSubobject<UEquipmentComponent>(TEXT("EQUIPMENT")); // 대문자 단축키는 Ctrl + Shift + U.
 	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("INVENTORY"));
 	SceneCapture = CreateDefaultSubobject<USceneCaptureComponent2D>(TEXT("SCENECAPTURE"));
 
@@ -81,20 +81,27 @@ void APlayer_Base::BeginPlay()
 			// UI와 데이터 바인딩.
 			HUD->BindCharacterStat(GetCharacterStat());
 			HUD->BindInventory(GetInventoryComponent());
+			HUD->BindEquipment(GetEquipmentComponent());
 		}
 	}
 
-	Equipment->SetEquipment(Equipment->CreateEquipment(100)); // 옷
-	Equipment->SetEquipment(Equipment->CreateEquipment(130)); // 얼굴
-	Equipment->SetEquipment(Equipment->CreateEquipment(140)); // 장갑
-	Equipment->SetEquipment(Equipment->CreateEquipment(150)); // 헤어
-	Equipment->SetEquipment(Equipment->CreateEquipment(180)); // 신발
-
+	// 바로 장착하기.
+	// EquipmentComponent->SetEquipment(EquipmentComponent->CreateEquipment(100)); // 옷
 
 	// 테스트용 아이템 인벤토리에 추가.
-	//UEquipment* testItem = NewObject<UEquipment>();
-	//testItem->Init(130, GetWorld());
-	//Inventory->AddItem(testItem);
+	Inventory->AddItem(EquipmentComponent->CreateEquipment(102)); // 옷
+	Inventory->AddItem(EquipmentComponent->CreateEquipment(111)); // 벨트
+	Inventory->AddItem(EquipmentComponent->CreateEquipment(121)); // 머리 장식
+	Inventory->AddItem(EquipmentComponent->CreateEquipment(133)); // 얼굴
+	Inventory->AddItem(EquipmentComponent->CreateEquipment(141)); // 장갑
+	Inventory->AddItem(EquipmentComponent->CreateEquipment(150)); // 헤어
+	Inventory->AddItem(EquipmentComponent->CreateEquipment(182)); // 신발
+	Inventory->AddItem(EquipmentComponent->CreateEquipment(193)); // 어깨 장식
+	Inventory->AddItem(EquipmentComponent->CreateEquipment(500)); // 가방
+
+	Inventory->AddItem(EquipmentComponent->CreateWeapon(200)); // 검
+	Inventory->AddItem(EquipmentComponent->CreateWeapon(200)); // 검
+	Inventory->AddItem(EquipmentComponent->CreateWeapon(200)); // 검
 }
 
 void APlayer_Base::Tick(float DeltaTime)
@@ -123,7 +130,7 @@ void APlayer_Base::PostInitializeComponents()
 	AnimBP->OnNextAttackCheck.AddUObject(this, &APlayer_Base::NextAttackCheck);
 
 	// 장비를 장착할 메쉬 설정.
-	Equipment->Init(GetMesh());
+	EquipmentComponent->Init(GetMesh());
 }
 
 void APlayer_Base::Attack()
@@ -167,6 +174,20 @@ bool APlayer_Base::UseItem(UItem* Item)
 		Item->Use(this);
 		if (Inventory->RemoveItem(Item))
 		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool APlayer_Base::TakeOffEquipment(UEquipment* Equipment)
+{
+	if (Equipment)
+	{
+		UEquipment* Pop = EquipmentComponent->PopEquipment(Equipment);
+		if (Pop)
+		{
+			Inventory->AddItem(Pop);
 			return true;
 		}
 	}

@@ -31,6 +31,7 @@ void AMain_HUD::ToggleInventory(bool isShow)
 	if (CreateUIObject() == false) return;
 
 	MainUIObject->ShowInventory(isShow);
+	MainUIObject->ShowEquipment(isShow);
 }
 
 void AMain_HUD::BindCharacterStat(UCharacterStatComponent* CharacterStat)
@@ -45,6 +46,13 @@ void AMain_HUD::BindInventory(class UInventoryComponent* Inventory)
 	if (CreateUIObject() == false) return;
 
 	MainUIObject->BindInventory(Inventory);
+}
+
+void AMain_HUD::BindEquipment(class UEquipmentComponent* Equipment)
+{
+	if (CreateUIObject() == false) return;
+
+	MainUIObject->BindEquipment(Equipment);
 }
 
 TSharedPtr<SWidget> AMain_HUD::GetChatInputTextObject()

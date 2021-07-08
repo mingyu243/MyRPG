@@ -12,7 +12,7 @@ void UUW_Inventory::NativeConstruct()
 {
 	Super::NativeConstruct();
 	
-	SlotMaxCount = 10;
+	SlotMaxCount = 20;
 	SlotMaxRowCount = 4;
 
 	SlotClass = LoadClass<UUW_InventorySlot>(nullptr, TEXT("WidgetBlueprint'/Game/Blueprints/UI/WB/WB_InventorySlot.WB_InventorySlot_C'"));
@@ -40,10 +40,16 @@ void UUW_Inventory::InitializeInventory(UInventoryComponent* Inventory)
 {
 	TArray<UItem*> Items = Inventory->GetItems();
 
-	for (int i=0; i<Items.Num(); i++)
+	// 한번 비우고,
+	for (int i = 0; i < Items.Num() + 1; i++)
+	{
+		SlotList[i]->SetItem(nullptr);
+	}
+
+	// 아이템만큼 UI 채워놓기.
+	for (int i = 0; i < Items.Num(); i++)
 	{
 		SlotList[i]->SetItem(Items[i]);
-		// 아이템만큼 UI 채워놓기.
 	}
 }
 

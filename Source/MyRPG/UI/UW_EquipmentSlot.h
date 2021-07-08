@@ -29,7 +29,7 @@ private:
 
 private:
 	UFUNCTION()
-	void TakeOffEquipment();
+	void SlotClicked();
 
 	void SetItemIconImage(class UTexture2D* Texture);
 };

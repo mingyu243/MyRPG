@@ -86,6 +86,7 @@ void APlayer_Base::BeginPlay()
 			HUD->BindEquipment(GetEquipmentComponent());
 		}
 	}
+	// 무기가 업데이트되면, 전투 방식도 새로 체크함.
 	GetEquipmentComponent()->OnWeaponUpdated.AddDynamic(this, &APlayer_Base::CheckCombatType);
 
 	// 바로 장착하기.

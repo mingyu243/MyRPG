@@ -23,7 +23,7 @@ enum class EAllMeshPartsType : uint8
 	E_SHIELD = 9,
 	E_WEAPON_LEFT = 10,
 	E_WEAPON_RIGHT = 11,
-	E_ELEMENT_COUNT = 12
+	E_ELEMENT_COUNT
 };
 
 UENUM(BlueprintType)
@@ -37,7 +37,7 @@ enum class ESkeletalMeshPartsType : uint8
 	E_BELT = 5,
 	E_GLOVE = 6,
 	E_SHOE = 7,
-	E_ELEMENT_COUNT = 8
+	E_ELEMENT_COUNT
 };
 
 UENUM(BlueprintType)
@@ -47,7 +47,7 @@ enum class EStaticMeshPartsType : uint8
 	E_SHIELD = 1,
 	E_WEAPON_LEFT = 2,
 	E_WEAPON_RIGHT = 3,
-	E_ELEMENT_COUNT = 4
+	E_ELEMENT_COUNT
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEquipmentUpdated);
